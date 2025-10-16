@@ -33,7 +33,7 @@
                 <li>Mahdollisuus, että sovelluksen tietokanta päätyisi ulkopuolisen haltuun, on vähäinen ja vaatii murtautumisen palvelimelle.</li>
                 <li>Järjestelmän ylläpitokäyttö ilman oikeuksia.</li>
             </ol>
-            Käyn läpi seuraavassa kuitenkin järjestelmässä käytettävät tiedot ja niiden tietoturvariskit:
+            Käyn läpi seuraavassa järjestelmässä käytettävät tiedot ja niiden tietoturvariskit:
             <ul>
                 <li>
                     <b>Asiakas:</b> Asiakkaasta ei tallenneta tietoja järjestelmään, vaan asiakas on määritetty Nginx-proxyssä alidomainina (esim. asiakas1.aikaleima.fi).
@@ -46,6 +46,7 @@
                         <li>
                             <b>Käyttäjän työaseman luvaton käyttö.</b> Järjestelmästä ei kirjauduta ulos missään vaiheessa. Mahdollisia yhteiskäyttölaitetilanteita varten sovelluksessa voidaan
                             kytkeä päälle PIN-koodin syöttö. PIN-koodi asetetaan, kun käyttäjä kirjautuu ensimmäisen kerran, ja se tallennetaan palvelimelle. Koodia kysytään joka kerta, kun sovellussivulle mennään selaimella.
+							Näin ollen käyttö onnistuu vain pin-koodin tietävälle.
                         </li>
                         <li>
                             <b>Selaimen IndexedDB:n hakkerointi ja tunnuksen käyttö toisella laitteella.</b> Sovellukseen voidaan laittaa IP-osoitteen tarkistus, jolloin tunnus ei toimi.

@@ -1,1 +1,4 @@
 /.vs
+/configuration/*.crt
+/configuration/*.ca
+/configuration/*.key
