@@ -1,0 +1,56 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <article>
+        <h2>Asiakasjärjestelmät</h2>
+        <p>
+            Sovelluksen tietoja voi hyödyntää monenlaisissa asiakasjärjestelmissä. Esimerkiksi yritys voi viedä Exceliin työntekijöiden leimaustiedot ja käyttää niitä palkanlaskennassa.
+            Jatkossa on tavoitteena julkaista ohjelma lähdekoodeineen, jonka avulla leimaustiedot voi hakea suoraan API-rajapinnan kautta. Siihen liittyen on myös mahdollista
+            toteuttaa leimaaja- ja leimauslajitietojen ylläpito rajapinnan kautta.
+        </p>
+        <p>
+            GPS-sijainnin käyttöönotto mahdollistaa esimerkiksi kilpailujen järjestäjille tiedon kilpailijoiden sijainnista ja reaaliaikaisen karttaesityksen toteuttamisen internetissä.
+            Eräs variaatio, jonka olen toteuttanut, on purjehduskilpailun seuranta kartalla ja tulosten laskenta.
+            Tämä vaatii kuitenkin kilpailuasetuksen käyttöönoton. Silloin pitää lisätä myös lähtö- ja maalilinjat sekä välipisteet.
+            Leimaukset muuttuvat reaaliaikaisesti tapahtuviksi aloitus- ja lopetusleimausten välillä.
+        </p>
+    </article>
+    <article>
+        <h2>Malliohjelmat sovelluksen API-rajapinnan hyodyntämisen </h2>
+        <p>
+            Nyt ensimmäinen ohjelma on toteutettu. Ohjelma on on toteutettu RUST-kielellä ja voi ladata  GitHubista <a href="https://github.com/Kettja12/Aikaleima-Console">Aikaleima-Console repository</a>
+            ja kääntää sen itse. Itse käytän Windows-ympäristöä mutta ohjelmat ovat komentorivipohjaisiaja alustariippumattomia joten ne voi kääntää  haluamaan ympäristöön.
+        </p>
+        <h3>Returnkey</h3>
+        <p>
+            Ohjelma palauttaa kirjautumisavaimen jota  jokainen sovellus käyttää jatkossa. API-käyttöön tulee tehdä käyttäjä-hallinnassa tunnus.
+            minkä kertakäyttöinen avain annataan parametrina ohjelmalle ja API-kutsu palauttaa sitten pysyvän avaimen.
+            <img src="apiavain.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="returnkey.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+        </p>
+    </article>
+    <script>
+        // Haetaan kaikki kuvat, jotka ovat <article>-elementtien sisällä
+        const images = document.querySelectorAll('article img');
+
+        // Lisätään jokaiseen kuvaan tapahtumankäsittelijät
+        images.forEach(img => {
+            const originalWidth = img.width; // Tallennetaan alkuperäinen leveys
+
+            img.addEventListener('mouseover', () => {
+                img.style.width = '600px'; // Muutetaan leveys 600px, kun hiiri on päällä
+            });
+            img.addEventListener('mouseout', () => {
+                img.style.width = originalWidth + 'px'; // Palautetaan alkuperäinen leveys, kun hiiri poistuu
+            });
+        });
+    </script>
+</body>
+</html>

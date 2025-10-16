@@ -1,0 +1,84 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <article>
+        <h2>Järjestelmän kokoonpano</h2>
+        <p style="overflow: auto;">
+            Järjestelmä koostuu seuraavista osista. Wildcard DNS nimistä *.aikaleima.fi ohjautuu liikenne Nginx proxy-palvelimelle, joka on asennettu Linux-virtuaalipalvelimelle.
+            Proxy-palvelin ohjaa liikenteen eri Blazor Server instansseihin, jotka on asennettu samalle Linux-virtuaalipalvelimelle. Jokaisella asiakkaalla on oma Blazor Server instanssi ja oma SQLite tietokanta.
+            Testiympäristössä on oma Blazor Server instanssi ja oma SQLite tietokanta.
+        </p>
+        <!-- Suuri kehys komponenteille -->
+        <div style="position: relative; border: 2px solid black; height: 300px; width: 720px;padding: 0px;margin: 40px;">
+
+            <!-- Linux-palvelin vasemmassa yläkulmassa -->
+            <div style="position: relative; top: 10px; left: 10px; ">
+                <a href="https://www.domainkeskus.com/"><b>Linux-virtuaalipalvelin</b></a>
+                <div style="position: relative; border: 1px solid black;
+                top: 10px;padding-left: 20px; left: -10px;width: 690px; height: 90px; ">
+                    <a href="https://fi.wikipedia.org/wiki/Nginx"><b>Nginx proxy-palvelin</b></a>
+                    <div style="position: relative; left: 300px; top: -10px;">Reititykset</div>
+                    <div style="position: relative; border: 1px solid black;
+                        top: 0px; left: 80px;width: 100px; height: 30px; ">
+                        <a href="https://aikaleima.fi">järjestelmän sivut</a>
+                    </div>
+                    <div style="position: relative; border: 1px solid black;
+                        top: -30px; left: 190px;width: 100px; height: 30px; ">
+                        <a href="https://testi.aikaleima.fi">Testi-palvelu</a>
+                    </div>
+                    <div style="position: relative; border: 1px solid black;
+                        top: -60px; left: 300px;width: 115px; height: 30px; ">
+                        asiakas1.aikaleima.fi
+                    </div>
+                    <div style="position: relative; border: 1px solid black;
+                        top: -90px; left: 420px;width: 115px; height: 30px; ">
+                        asiakas2.aikaleima.fi
+                    </div>
+                    <div style="position: relative; border: 1px solid black;
+                        top: -120px; left: 540px;width: 120px; height: 30px; ">
+                        asiakas2.aikaleima.fi
+                    </div>
+                </div>
+                <div style="position: relative; border: 1px solid black;
+                top: 20px; left: -10px;padding-left: 20px; width: 690px; height: 120px; ">
+                    <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor"><b>.NET 10 Blazor Server instanssit</b></a>
+                    <div style="position: relative; left: 300px; top: -10px;">
+                        Localhost instannsit omissa porteissaan 5000-5999<br>
+                        ja asennuskansiossaan. Tietokanta asennuskansiossa.
+                        <div style="position: relative; border: 1px solid black;
+                        top: 10px; left: -120px;width: 100px; height: 60px; ">
+                            Testi-palvelu
+                            (localhost:5000)
+                            <a href="https://www.sqlite.org/index.html">SQLite tietojanta</a>
+                        </div>
+                        <div style="position: relative; border: 1px solid black;
+                        top: -50px; left: -10px;width: 115px; height: 60px; ">
+                            asiakas1.aikaleima.fi
+                            (localhost:5001)
+                            (SQLite tietojanta)
+                        </div>
+                        <div style="position: relative; border: 1px solid black;
+                        top: -110; left: 110px;width: 115px; height: 60px; ">
+                            asiakas2.aikaleima.fi
+                            (localhost:5002)
+                            (SQLite tietojanta)
+                        </div>
+                        <div style="position: relative; border: 1px solid black;
+                        top: -170px; left: 230px;width: 120px; height: 60px; ">
+                            asiakas3.aikaleima.fi
+                            (localhost:5003)
+                            (SQLite tietojanta)
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </article>
+</body>
+</html>

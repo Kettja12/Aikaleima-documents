@@ -1,0 +1,83 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <article>
+        <h2>Aikaleima ja GDPR</h2>
+        <p>
+            Tämä ei ole mikään virallinen GDPR-seloste, vaan omia pohdintojani siitä, miten GDPR vaikuttaa aikaleimasovelluksen käyttöön.
+            Alkuun kappale tekoälyn tuottamaa tekstiä aiheesta. Seuraavissa kappaleissa ilman tekoälyä tehty tietoturvan konkreettista pohdintaa.
+		</p>
+		<p>
+			GDPR on lyhenne sanoista General Data Protection Regulation, eli yleinen tietosuoja-asetus. Se on EU:n asetus, joka tuli voimaan 25.5.2018.
+            Sen tarkoituksena on suojata EU-kansalaisten henkilötietoja ja yksityisyyttä.
+            Aikaleimasovellus kerää ja käsittelee henkilötietoja, kuten leimaajan nimeä, leimauslajia, leimausaikaa ja GPS-sijaintia.
+            Näiden tietojen käsittelyyn sovelletaan GDPR:n periaatteita, kuten lainmukaisuus, kohtuullisuus, läpinäkyvyys, tarkoitussidonnaisuus, tietojen minimointi, tarkkuus, säilytyksen rajoittaminen ja eheys ja luottamuksellisuus.
+            Aikaleimasovelluksen käyttäjänä sinun tulee varmistaa, että sinulla on lainmukainen peruste henkilötietojen käsittelylle.
+            Yleisiä perusteita ovat esimerkiksi suostumus, sopimuksen täytäntöönpano, lakisääteinen velvoite, elintärkeiden etujen suojaaminen, yleisen edun mukainen tehtävä tai rekisterinpitäjän tai kolmannen osapuolen oikeutettu etu.
+            Sinun tulee myös informoida leimaajia siitä, miten heidän henkilötietojaan käsitellään, mihin tarkoituksiin, kuinka kauan niitä säilytetään ja keiden kanssa niitä jaetaan.
+            Sinulla on myös velvollisuus huolehtia henkilötietojen turvallisuudesta ja estää niiden luvaton käyttö, muuttaminen tai tuhoaminen.
+            Sinulla on myös velvollisuus noudattaa leimaajien oikeuksia, kuten oikeutta saada pääsy omiin tietoihinsa, oikeutta oikaista virheelliset tiedot, oikeutta poistaa tiedot, oikeutta rajoittaa käsittelyä, oikeutta vastustaa käsittelyä ja oikeutta siirtää tiedot järjestelmästä toiseen.
+            Sinun tulee myös ilmoittaa mahdollisista tietoturvaloukkauksista valvontaviranomaiselle ja leimaajille, jos niistä aiheutuu riski heidän oikeuksilleen ja vapauksilleen.
+        </p>
+        <p>
+            Aikaleimasovellus on suunniteltu siten, että se minimoi kerättävät tiedot. Mahdollisia tietoturvamalleja on seuraavat:
+            <ol>
+                <li>Tiedot ovat julkisia, esimerkiksi kilpailuihin osallistujien ja heidän sijaintitietonsa jaetaan julkisesti ja säilytetään tilastoissa ja muissa välineissä. Tällöin tietojen jakaminen on loppukäyttäjän tietoinen valinta.</li>
+                <li>Tiedot ovat yksityisiä asiakkaan ja loppukäyttäjän välisen sopimuksen mukaisesti hallittavia.</li>
+                <li>Mahdollisuus, että sovelluksen tietokanta päätyisi ulkopuolisen haltuun, on vähäinen ja vaatii murtautumisen palvelimelle.</li>
+                <li>Järjestelmän ylläpitokäyttö ilman oikeuksia.</li>
+            </ol>
+            Käyn läpi seuraavassa kuitenkin järjestelmässä käytettävät tiedot ja niiden tietoturvariskit:
+            <ul>
+                <li>
+                    <b>Asiakas:</b> Asiakkaasta ei tallenneta tietoja järjestelmään, vaan asiakas on määritetty Nginx-proxyssä alidomainina (esim. asiakas1.aikaleima.fi).
+                </li>
+                <li>
+                    <b>Käyttäjä:</b> Järjestelmän ylläpitäjät kirjautuvat järjestelmään kertakäyttöisellä tunnuksella, joka aktivoi käyttäjän. Käyttäjän tunniste
+                    tallennetaan selaimen IndexedDB-tietokantaan. Normaali evästehakkerointi on estetty tällä. HTTPS/SignalR-yhteys varmistaa luotettavan tiedonsiirron selaimen ja järjestelmän välillä.
+                    Mahdollisia tietoturvariskejä:
+                    <ol>
+                        <li>
+                            <b>Käyttäjän työaseman luvaton käyttö.</b> Järjestelmästä ei kirjauduta ulos missään vaiheessa. Mahdollisia yhteiskäyttölaitetilanteita varten sovelluksessa voidaan
+                            kytkeä päälle PIN-koodin syöttö. PIN-koodi asetetaan, kun käyttäjä kirjautuu ensimmäisen kerran, ja se tallennetaan palvelimelle. Koodia kysytään joka kerta, kun sovellussivulle mennään selaimella.
+                        </li>
+                        <li>
+                            <b>Selaimen IndexedDB:n hakkerointi ja tunnuksen käyttö toisella laitteella.</b> Sovellukseen voidaan laittaa IP-osoitteen tarkistus, jolloin tunnus ei toimi.
+                            Teknisistä syistä tämä ei kuitenkaan ole mielekästä, koska loppukäyttäjän IP-osoite voi vaihtua, jolloin kirjautuminen ei enää onnistu.
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <b>Leimaaja:</b> Leimaajan nimi ja tunniste. Tunniste on asiakaskohtainen ja tunnisteen avulla asiakas voi kohdistaa leimauksen oikeaan henkilöön.
+                    Nimi on vapaamuotoinen ja voi olla myös sama kuin tunniste. Käyttötilanteet huomioiden, jos leimauksen kohdistaminen halutaan varmistaa, on
+                    asiakkaan oma valinta, näytetäänkö nimen kohdalla selväkielinen nimi vai jokin muu tunniste.
+                    Tietoturvariski on leimaajan yhdistäminen nimellä asiakkaaseen.
+                </li>
+                <li>
+                    <b>Leimauslaji:</b> Leimauslajin nimi ja tunniste. Tunniste on asiakaskohtainen, millä asiakas kohdistaa leimauksen asiakkaan sisäiseen tietoon.
+                    Nimen avulla leimaaja voi kohdistaa leimauksen oikeaan leimaustapaan. Tietoturvariski tulee leimauksen kautta, jossa leimauslaji yhdistetään leimaajaan.
+                    Se on kuitenkin minimaalinen, koska leimaustietoja ei tallenneta järjestelmässä pitkää aikaa, mikäli toimitaan sovelluksen suositellun toimintatavan mukaan.
+                </li>
+                <li>
+                    <b>Laite:</b> Laitteen tunniste. Tunniste on asiakaskohtainen, jolla asiakas voi kohdistaa leimauksen oikeaan laitteeseen.
+                    Laite voi olla myös henkilökohtainen, kuten puhelin. Tieto on pitkäaikainen järjestelmässä.
+                    Laitteen tunnisteen ja henkilökohtaisen laitteen leimaajan nimen yhdistäminen on tietoturvan kannalta vähäinen riski,
+                    koska tiedon hyödyntämisarvo on pieni. Esimerkki: "asiakas", "Kati", "Katin puhelin1" Myos puhinnumero voi olla tunnisteena.
+                    silloinkaan vakavassa tietomurrossa saavutettava "asiakas", "Kati", "040-1234567" tieto ei ole merkittävä riski.
+                </li>
+                <li>
+                    <b>Leimaus:</b> Leimaus yhdistää edellä mainitut tiedot, tapahtumahetken ja mahdollisesti GPS-sijainnin.
+                    Tietoturvariski on tämän tiedon vuotaminen. Se on kuitenkin minimaalinen, koska leimaustietoja ei tallenneta järjestelmässä
+                    pitkää aikaa, mikäli toimitaan sovelluksen suositellun toimintatavan mukaan.
+                </li>
+            </ul>
+        </p>
+    </article>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+        .diagram-container {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            min-height: 400px;
+            margin: 40px auto; /* Center the container */
+            width: fit-content; /* Adjust width to content */
+        }
+
+        .circle-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .circle-link {
+            width: 150px;
+            height: 150px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+            .circle-link:hover {
+                background-color: #0056b3;
+                color: white;
+                text-decoration: none;
+            }
+
+        .square-link {
+            width: 150px;
+            height: 150px;
+            background-color: #28a745;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+            .square-link:hover {
+                background-color: #218838;
+                color: white;
+                text-decoration: none;
+            }
+
+        .connecting-line {
+            position: relative;
+            background-color: #6c757d;
+            z-index: 1;
+        }
+
+        .line-top {
+            margin-top: -50px; /* From top of circle to square above */
+            width: 8px;
+            height: 50px;
+            transform: translateX(-50%);
+        }
+
+        .line-bottom {
+            top: 10 px; /* From bottom of circle to square below */
+            width: 8px;
+            height: 50px;
+            transform: translateX(-50%);
+        }
+
+        .line-right {
+            top: -20px;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 8px;
+        }
+
+        .line-diagonal {
+            top: 90px; /* Ylläpito-laatikon yläreunan taso */
+            left: -220px; /* Ensimmäisen sarakkeen oikea reuna */
+            width: 120px; /* Viivan pituus */
+            height: 8px;
+            background-color: #6c757d;
+            z-index: 100;
+            transform: rotate(135deg);
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h2>Aikaleimapalvelu</h2>
+        <p>
+            Aikaleima on palvelu, jolla asiakas voi hallita erilaisia leimaustapahtumia. Järjestelmän ydinosat ovat leimaustietojen hallinta ja leimauspääte. Järjestelmä on asiakaskohtainen ja löytyy osoitteesta asiakas.aikaleima.fi. Tietoihin pääsevät käsiksi vain asiakkaan käyttäjät ja palvelun ylläpitäjä. Tiedot sijaitsevat asiakaskohtaisessa tietokannassa ja leimaustietojen osalta vain sen aikaa, kunnes ne on siirretty asiakkaan järjestelmiin. Siirron jälkeen asiakas voi poistaa tiedot järjestelmästä.
+        </p>
+        <p>
+            <a href="https://testi.aikaleima.fi" class="btn btn-primary">Testi-ympäristöön tästä linkistä. käyttäjäavaimella testi pääsee ylläpitoon.</a>
+        </p>
+
+    </article>
+
+    <div class="container diagram-container">
+        <div class="d-flex flex-column align-items-center">
+            <a href="leimaus.html" class="square-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Leimaus tehdään Android-sovelluksella tai selaimessa">Leimaus</a>
+            <div class="connecting-line line-top"
+                 data-bs-toggle="tooltip"
+                 data-bs-placement="right"
+                 title="Leimaussovellus on yhteydessä järjestelmään API-rajapinnan kautta"></div>
+            <a href="jarjestelma.html" class="circle-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Järjestelmä on virtuaalipalvelimessa toimiva asiakaskohtainen sovellus">Järjestelmä</a>
+            <div class="connecting-line line-bottom"
+                 data-bs-toggle="tooltip"
+                 data-bs-placement="right"
+                 title="Ylläpito clientit on yhteydessä järjestelmään SignalR-rajapinnan kautta"></div>
+            <a href="yllapito.html" class="square-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Ylläpito tehdään selaimella käyttäen palvelimella olevaa sovellusta">Ylläpito</a>
+        </div>
+        <div class="d-flex flex-column align-items-start">
+            <div class="d-flex align-items-center">
+                <div class="connecting-line line-right"
+                     data-bs-toggle="tooltip"
+                     data-bs-placement="right"
+                     title="asiakasjärjestelmät voi olla yhteydessä järjestelmään API-rajapinnan kautta"></div>
+                <a href="asiakasjarjestelmat.html" class="square-link"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right"
+                   title="Asiakasjärjestelmät jotka tarvitsevat leimaustietoja saavat ne käyttöönsä tiedostomuodossa tai API-rajapinnan kautta">Asiakasjärjestelmät</a>
+            </div>
+        </div>
+        <!-- Diagonaalinen viiva Ylläpidon ja Asiakasjärjestelmien välille -->
+        <div class="connecting-line line-diagonal"
+             data-bs-toggle="tooltip"
+             data-bs-placement="right"
+             title="Ylläpito clientista tehdään siirtotiedostoja asiakasjärjestelmille"></div>
+    </div>
+
+    <script>
+        // Initialize all tooltips on the page
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">&copy; Copyright Jari Kettunen | </span>
+            <a href="https://fi.linkedin.com/in/jarikettunen" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+            <a href="https://github.com/Kettja12" target="_blank" rel="noopener noreferrer">GitHub</a> |
+            <a href="GDPR.html">Tietosuoja</a>
+        </div>
+    </footer>
+</body>
+</html>
