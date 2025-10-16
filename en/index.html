@@ -1,0 +1,179 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <style>
+        .diagram-container {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            min-height: 400px;
+            margin: 40px auto; /* Center the container */
+            width: fit-content; /* Adjust width to content */
+        }
+
+        .circle-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .circle-link {
+            width: 150px;
+            height: 150px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+            .circle-link:hover {
+                background-color: #0056b3;
+                color: white;
+                text-decoration: none;
+            }
+
+        .square-link {
+            width: 150px;
+            height: 150px;
+            background-color: #28a745;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+            .square-link:hover {
+                background-color: #218838;
+                color: white;
+                text-decoration: none;
+            }
+
+        .connecting-line {
+            position: relative;
+            background-color: #6c757d;
+            z-index: 1;
+        }
+
+        .line-top {
+            margin-top: -50px; /* From top of circle to square above */
+            width: 8px;
+            height: 50px;
+            transform: translateX(-50%);
+        }
+
+        .line-bottom {
+            top: 10 px; /* From bottom of circle to square below */
+            width: 8px;
+            height: 50px;
+            transform: translateX(-50%);
+        }
+
+        .line-right {
+            top: -20px;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 8px;
+        }
+
+        .line-diagonal {
+            top: 90px; /* Ylläpito-laatikon yläreunan taso */
+            left: -220px; /* Ensimmäisen sarakkeen oikea reuna */
+            width: 120px; /* Viivan pituus */
+            height: 8px;
+            background-color: #6c757d;
+            z-index: 100;
+            transform: rotate(135deg);
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h2>Timestamp Service</h2>
+        <p>
+            Timestamp is a service that allows a customer to manage various stamping events. The core parts of the system are the management of stamping data and the stamping terminal. The system is customer-specific and can be found at customer.aikaleima.fi. Only the customer's users and the service administrator can access the data. The data is located in a customer-specific database and, for stamping data, only until it has been transferred to the customer's systems. After the transfer, the customer can delete the data from the system.
+        </p>
+		<p>
+		 The system/software, whatever you want to call it, is a so-called Proof of Concept. Not a commercial version. With this system, I aim to test
+		 how a Blazor Server Side web application works in a production-like environment. And how maintenance and duplicating the application for multiple customers can be done
+		 as simply as possible. If you are a programmer and have struggled with the same things or are just interested in the code and/or concept, please get in touch.
+		 Those who have struggled with AWS and Azure will surely agree that there must be a simpler and cheaper way to implement production systems.
+		<p>
+        <p>
+            <a href="https://testi.aikaleima.fi" class="btn btn-primary">Link to the Test environment. Use the user key 'testi' to access the admin functions.</a>
+        </p>
+
+    </article>
+
+    <div class="container diagram-container">
+        <div class="d-flex flex-column align-items-center">
+            <a href="leimaus.html" class="square-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="top"
+               title="Stamping is done with an Android application or in a browser">Stamping</a>
+            <div class="connecting-line line-top"
+                 data-bs-toggle="tooltip"
+                 data-bs-placement="top"
+                 title="The stamping application connects to the system via an API"></div>
+            <a href="jarjestelma.html" class="circle-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="The system is a customer-specific application running on a virtual server">System</a>
+            <div class="connecting-line line-bottom"
+                 data-bs-toggle="tooltip"
+                 data-bs-placement="bottom"
+                 title="Admin clients connect to the system via a SignalR interface"></div>
+            <a href="yllapito.html" class="square-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="bottom"
+               title="Administration is done with a browser using the application on the server">Admin</a>
+        </div>
+        <div class="d-flex flex-column align-items-start">
+            <div class="d-flex align-items-center">
+                <div class="connecting-line line-right"
+                     data-bs-toggle="tooltip"
+                     data-bs-placement="right"
+                     title="Customer systems can connect to the system via an API"></div>
+                <a href="asiakasjarjestelmat.html" class="square-link"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right"
+                   title="Customer systems that need stamping data can access it in file format or via an API">Customer Systems</a>
+            </div>
+        </div>
+        <!-- Diagonaalinen viiva Ylläpidon ja Asiakasjärjestelmien välille -->
+        <div class="connecting-line line-diagonal"
+             data-bs-toggle="tooltip"
+             data-bs-placement="right"
+             title="Transfer files for customer systems are created from the admin client"></div>
+    </div>
+
+    <script>
+        // Initialize all tooltips on the page
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">&copy; Copyright Jari Kettunen | </span>
+            <a href="https://fi.linkedin.com/in/jarikettunen" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+            <a href="https://github.com/Kettja12" target="_blank" rel="noopener noreferrer">GitHub</a> |
+            <a href="GDPR.html">Privacy Policy</a>
+        </div>
+    </footer>
+</body>
+</html>

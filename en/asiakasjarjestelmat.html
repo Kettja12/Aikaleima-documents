@@ -1,0 +1,59 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+    <article>
+        <h2>Customer Systems</h2>
+        <p>
+            The application's data can be utilized in various customer systems. For example, a company can export employee stamping data to Excel and use it for payroll calculation.
+            In the future, the goal is to publish the program with its source code, allowing stamping data to be retrieved directly via an API. In connection with this, it is also possible
+            to implement the maintenance of stamper and stamping type data through the API.
+        </p>
+        <p>
+            The implementation of GPS location allows, for example, competition organizers to have information about competitors' locations and to implement a real-time map display on the internet.
+            One variation I have implemented is tracking a sailing competition on a map and calculating the results.
+            However, this requires the activation of the competition setting. In that case, start and finish lines, as well as intermediate points, must also be added.
+            Stamps are recorded in real-time (at intervals of 1 second to 1 minute) between the start and end stamps.
+        </p>
+    </article>
+    <article>
+        <h2>Sample programs for utilizing the application's API</h2>
+        <p>
+            The first program has now been implemented. The program is implemented in the RUST language and can be downloaded from GitHub at the <a href="https://github.com/Kettja12/Aikaleima-Console">Aikaleima-Console repository</a>
+            and compiled yourself. I use a Windows environment myself, but the programs are command-line based and platform-independent, so they can be compiled for your desired environment.
+        </p>
+        <h3>Returnkey</h3>
+        <p style="overflow: auto;">
+            The program returns a login key that every application will use in the future. For API use, a user must be created in user management.
+            A one-time key is given as a parameter to the program, and the API call then returns a permanent key.
+            <img src="apiavain.png" alt="Login" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="returnkey.png" alt="Return Key" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+        </p>
+    </article>
+    <script>
+        // Get all images within <article> elements
+        const images = document.querySelectorAll('article img');
+
+        // Add event handlers to each image
+        images.forEach(img => {
+            const originalWidth = img.width; // Save the original width
+
+            img.addEventListener('mouseover', () => {
+                img.style.transition = 'width 0.3s ease-in-out';
+                img.style.width = '600px'; // Change width to 600px on hover
+                img.style.cursor = 'zoom-in';
+            });
+            img.addEventListener('mouseout', () => {
+                img.style.width = originalWidth + 'px'; // Restore original width when mouse leaves
+                img.style.cursor = 'default';
+            });
+        });
+    </script>
+</body>
+</html>

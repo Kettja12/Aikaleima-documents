@@ -1,0 +1,85 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+    <article>
+        <h2>System Configuration</h2>
+        <p>
+            The system consists of the following parts. Traffic from the wildcard DNS name *.aikaleima.fi is directed to an Nginx proxy server installed on a Linux virtual server.
+            The proxy server directs traffic to different Blazor Server instances, which are installed on the same Linux virtual server. Each customer has their own Blazor Server instance and their own SQLite database.
+            The test environment has its own Blazor Server instance and its own SQLite database.
+        </p>
+        <!-- Suuri kehys komponenteille -->
+        <div style="position: relative; border: 2px solid black; height: 420px; width: 720px; padding: 10px; margin: 40px;">
+
+            <!-- Linux-palvelin vasemmassa yläkulmassa -->
+            <div style="position: relative; top: 0; left: 0; width: 100%; height: 100%;">
+                <a href="https://www.domainkeskus.com/"><b>Linux Virtual Server</b></a>
+                
+                <!-- Nginx Proxy Server -->
+                <div style="position: absolute; border: 1px solid black; top: 30px; left: 0; width: 698px; height: 120px; padding: 5px;">
+                    <a href="https://en.wikipedia.org/wiki/Nginx"><b>Nginx Proxy Server</b></a>
+                    <a href="nginx.conf"><b>Configuration</b></a>
+                    <div style="position: absolute; left: 300px; top: 5px;"> <a href="testi_http.conf"><b>Routes</b></a></div>
+                    
+                    <div style="position: absolute; border: 1px solid black; top: 30px; left: 80px; width: 100px; height: 70px; padding: 5px; text-align: center;">
+                        <a href="https://aikaleima.fi">System Pages</a>
+                    </div>
+                    <div style="position: absolute; border: 1px solid black; top: 30px; left: 190px; width: 100px; height: 70px; padding: 5px; text-align: center;">
+                        <a href="https://testi.aikaleima.fi">Test Service</a><br>
+                        <a href="ssr.service">Config</a>
+                    </div>
+                    <div style="position: absolute; border: 1px solid black; top: 30px; left: 300px; width: 115px; height: 70px; padding: 5px; text-align: center;">
+                        customer1<br>
+						.aikaleima.fi
+                    </div>
+                    <div style="position: absolute; border: 1px solid black; top: 30px; left: 420px; width: 115px; height: 70px; padding: 5px; text-align: center;">
+                        customer2<br>.aikaleima.fi
+                    </div>
+                    <div style="position: absolute; border: 1px solid black; top: 30px; left: 540px; width: 120px; height: 70px; padding: 5px; text-align: center;">
+                        customer3<br>.aikaleima.fi
+                    </div>
+                </div>
+
+                <!-- Blazor Server Instances -->
+                <div style="position: absolute; border: 1px solid black; top: 160px; left: 0; width: 698px; height: 240px; padding: 5px;">
+                    <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor"><b>.NET 10 Blazor Server Instances</b></a>
+                    <div style="position: absolute; left: 300px; top: 5px;">
+                        Localhost instances in their own ports 5000-5999<br>
+                        and in their installation directory. Database in the installation directory.
+                    </div>
+                    <div style="position: absolute; top: 50px; left: 10px; width: 100%;">
+                        <div style="position: absolute; border: 1px solid black; left: 180px; width: 110px; height: 160px; padding: 5px; text-align: center;">
+                            Test-Service
+                            (localhost:5000)<br><br>
+                            <a href="https://www.sqlite.org/index.html">SQLite Database</a><br><br>
+							<a href="https://github.com/Kettja12/aikajana-ssr">Source Code</a>
+                        </div>
+                        <div style="position: absolute; border: 1px solid black; left: 300px; width: 115px; height: 160px; padding: 5px; text-align: center;">
+                            customer1<br>.aikaleima.fi
+                            (localhost:5001)<br><br>
+                            (SQLite Database)
+                        </div>
+                        <div style="position: absolute; border: 1px solid black; left: 420px; width: 115px; height: 160px; padding: 5px; text-align: center;">
+                            customer2<br>.aikaleima.fi
+                            (localhost:5002)<br><br>
+                            (SQLite Database)
+                        </div>
+                        <div style="position: absolute; border: 1px solid black; left: 540px; width: 120px; height: 160px; padding: 5px; text-align: center;">
+                            customer3<br>.aikaleima.fi
+                            (localhost:5003)<br><br>
+                            (SQLite Database)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+    <article>
+        <h2>Timestamp and GDPR</h2>
+        <p>
+            This is not an official GDPR statement, but my own thoughts on how GDPR affects the use of the timestamp application.
+            To start, a paragraph of AI-generated text on the topic. The following paragraphs contain a concrete discussion of data security without AI.
+		</p>
+		<p>
+			GDPR stands for General Data Protection Regulation. It is an EU regulation that came into force on May 25, 2018.
+            Its purpose is to protect the personal data and privacy of EU citizens.
+            The Timestamp application collects and processes personal data, such as the stamper's name, stamping type, stamping time, and GPS location.
+            The processing of this data is subject to the principles of GDPR, such as lawfulness, fairness, transparency, purpose limitation, data minimization, accuracy, storage limitation, and integrity and confidentiality.
+            As a user of the Timestamp application, you must ensure that you have a lawful basis for processing personal data.
+            Common grounds include, for example, consent, performance of a contract, legal obligation, protection of vital interests, a task carried out in the public interest, or the legitimate interests of the controller or a third party.
+            You must also inform the stampers about how their personal data is processed, for what purposes, how long it is stored, and with whom it is shared.
+            You also have a duty to ensure the security of personal data and prevent its unauthorized use, alteration, or destruction.
+            You also have a duty to respect the rights of the stampers, such as the right to access their own data, the right to rectify inaccurate data, the right to erasure, the right to restrict processing, the right to object to processing, and the right to data portability.
+            You must also report any data breaches to the supervisory authority and the stampers if they pose a risk to their rights and freedoms.
+        </p>
+        <p>
+            The Timestamp application is designed to minimize the data collected. Possible data security models are as follows:
+            <ol>
+                <li>The data is public, for example, the location data of competition participants is shared publicly and stored in statistics and other tools. In this case, sharing the data is a conscious choice of the end-user.</li>
+                <li>The data is private and managed according to the agreement between the customer and the end-user.</li>
+                <li>The possibility of the application's database falling into the hands of an outsider is minimal and requires breaking into the server.</li>
+                <li>Unauthorized administrative use of the system.</li>
+            </ol>
+            Next, I will go through the data used in the system and their security risks:
+            <ul>
+                <li>
+                    <b>Customer:</b> No customer information is stored in the system; instead, the customer is defined as a subdomain in the Nginx proxy (e.g., customer1.aikaleima.fi).
+                </li>
+                <li>
+                    <b>User:</b> System administrators log in to the system with a one-time token that activates the user. The user's identifier
+                    is stored in the browser's IndexedDB. This prevents normal cookie hacking. The HTTPS/SignalR connection ensures reliable data transfer between the browser and the system.
+                    Possible security risks:
+                    <ol>
+                        <li>
+                            <b>Unauthorized use of the user's workstation.</b> The system does not have a logout function. For possible shared device situations, the application can
+                            enable PIN code entry. The PIN code is set when the user logs in for the first time and is stored on the server. The code is requested every time the application page is accessed with a browser.
+							Thus, only someone who knows the PIN code can use it.
+                        </li>
+                        <li>
+                            <b>Hacking the browser's IndexedDB and using the token on another device.</b> The application can be set to check the IP address, which would prevent the token from working.
+                            However, for technical reasons, this is not practical, as the end user's IP address may change, which would prevent login.
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <b>Stamper:</b> The stamper's name and identifier. The identifier is customer-specific, and with it, the customer can assign the stamp to the correct person.
+                    The name is free-form and can also be the same as the identifier. Considering the use cases, if the assignment of the stamp needs to be ensured, it is
+                    the customer's choice whether to display a clear name or some other identifier.
+                    The security risk is linking the stamper to the customer by name.
+                </li>
+                <li>
+                    <b>Stamping Type:</b> The name and identifier of the stamping type. The identifier is customer-specific, with which the customer links the stamp to internal data.
+                    The name helps the stamper to select the correct stamping method. The security risk comes from the stamp itself, where the stamping type is linked to the stamper.
+                    However, it is minimal because stamping data is not stored in the system for a long time if the recommended operating procedure of the application is followed.
+                </li>
+                <li>
+                    <b>Device:</b> The device identifier. The identifier is customer-specific, allowing the customer to assign the stamp to the correct device.
+                    The device can also be personal, like a phone. This information is long-term in the system.
+                    Combining the device identifier and the name of the stamper of a personal device is a minor security risk,
+                    because the value of exploiting the information is small. Example: "customer", "Kati", "Kati's phone1". The phone number can also be an identifier.
+                    Even then, in a serious data breach, the obtainable information "customer", "Kati", "040-1234567" is not a significant risk.
+                </li>
+                <li>
+                    <b>Stamp:</b> A stamp combines the aforementioned information, the time of the event, and possibly the GPS location.
+                    The security risk is the leakage of this information. However, it is minimal because stamping data is not stored in the system
+                    for a long time if the recommended operating procedure of the application is followed.
+                </li>
+            </ul>
+        </p>
+    </article>
+</body>
+</html>

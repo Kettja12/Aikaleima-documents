@@ -1,0 +1,18 @@
+#etc/systemd/system
+[Unit]
+Description=Timestamp Admin server
+
+[Service]
+WorkingDirectory=/usr/share/homesite/ssr
+ExecStart= /usr/share/homesite/ssr/ssr
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=ssr
+User=root
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_NOLOGO=true
+Environment=ASPNETCORE_URLS="http://localhost:5000"
+[Install]
+WantedBy=multi-user.target

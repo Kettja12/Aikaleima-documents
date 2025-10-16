@@ -1,0 +1,105 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+    <article>
+        <h2>Administration</h2>
+        <p style="overflow: auto;">
+            <img src="kirjautuminen.png" alt="Login" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            When the application starts, it asks you to log in on the first use. The login ID is "testi" in the test environment
+            and a customer-specific ID in the production environment. The login function allows access to customer data maintenance on the device.
+            The login key is single-use and is entered on the login screen. Logging in activates the ID and identifies the device.
+            In the future, the program will use its own internal method to identify data transfer between the browser and the server. There is no logout from the application,
+            so the browser session remains logged in. If the application does not work and re-login is required,
+            the user must request the ID to be unlocked according to the customer's agreed practice.
+            With the login key creation function, the ID can be used to log in again on the same or another device.
+            The login ID is tied to the browser or device. The same ID cannot be activated for another browser or device for simultaneous use;
+            each browser or device requires its own ID.
+        </p>
+    </article>
+    <article>
+        <h2>Home Page</h2>
+        <p style="overflow: auto;">
+            <img src="kotisivu.png" alt="Home Page" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            After logging in, the home page opens. The home page has links to different functions. The functions are described below. The goal is to add statistics on stampings
+            and an error log display to the home page in the future.
+        </p>
+    </article>
+
+    <article>
+        <h2>Users</h2>
+        <p style="overflow: auto;">
+            <img src="kayttajat.png" alt="Users" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            The user screen is used to maintain the information of the customer's timestamp service administrators. Typically 1–2 people who log in to the service from their own workstations.
+            A PIN code can be set per user to protect the login. The user enters their desired PIN code on the first login, and it is saved on the server.
+            In the future, when the application starts, the program logs in with the login key in the browser's IndexedDB, and if the login is successful, the program will also ask for the user's PIN code to ensure that the correct user is logging in.
+        </p>
+    </article>
+    <article>
+        <h2>Stamping Types</h2>
+        <p style="overflow: auto;">
+            <img src="leimauslajit.png" alt="Stamping Types" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Stamping types contain a name and a key related to the stamping information according to the customer's systems. This allows the stamping event to be identified when transferring data to customer systems.
+        </p>
+    </article>
+    <article>
+        <h2>Stampers</h2>
+        <p style="overflow: auto;">
+            <img src="leimaajat.png" alt="Stampers" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Stampers contain a name and a key related to the stamper according to the customer's systems. This allows the stamping event to be identified when transferring data to customer systems.
+        </p>
+    </article>
+    <article>
+        <h2>Devices</h2>
+        <p style="overflow: auto;">
+            <img src="laitteet.png" alt="Devices" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Devices contain a unique name. A device can be personal, such as a phone application, in which case the device is linked to the information in the stamper data.
+            A device can be a public stamping terminal, in which case the stamper must enter a personal key during the stamping event to assign it. The device's time information is used as the basis for the stamp.
+            The GPS setting can also be turned on for the device, in which case the coordinates are also saved with the stamp. The program asks for permission to use location data the first time in the browser and on the phone.
+        </p>
+    </article>
+    <article>
+        <h2>Stamps</h2>
+        <p>
+        <p style="overflow: auto;">
+            <img src="leimaukset.png" alt="Stamps" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            The list shows the location data and, as an example, a link to Google Maps. As you can see from the picture, the location provided by the browser is not accurate, but the phone's GPS data is.
+        </p>
+    </article>
+    <article>
+        <h2>Stamping</h2>
+        <p style="overflow: auto;">
+            <img src="leimaus.png" alt="Stamping" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Stamping can also be done with the application. However, you must then log in with a stamping ID, which is different from the administration ID.
+            If the device is a public stamping terminal, the stamper must enter a personal key to assign the stamping event. With suitable accessories,
+            a barcode reader can also be used, for example, to read a barcode from an ID card, or an RFID reader to identify the stamper from a chip.
+        </p>
+    </article>
+
+    <script>
+        // Get all images within <article> elements
+        const images = document.querySelectorAll('article img');
+
+        // Add event handlers to each image
+        images.forEach(img => {
+            const originalWidth = img.width; // Save the original width
+
+            img.addEventListener('mouseover', () => {
+                img.style.transition = 'width 0.3s ease-in-out';
+                img.style.width = '600px'; // Change width to 600px on hover
+                img.style.cursor = 'zoom-in';
+            });
+            img.addEventListener('mouseout', () => {
+                img.style.width = originalWidth + 'px'; // Restore original width when mouse leaves
+                img.style.cursor = 'default';
+            });
+        });
+    </script>
+</body>
+</html>
