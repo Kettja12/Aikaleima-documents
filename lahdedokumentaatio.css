@@ -1,0 +1,170 @@
+.diagram-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+    display: flex; /* Asetetaan flexbox-containeriksi */
+    align-items: flex-start; /* Kohdistetaan laatikot yläreunaan */
+    gap: 120px; /* Lisätään tasainen väli laatikoiden väliin */
+    min-height: 400px; /* Varmistetaan riittävä korkeus */
+    padding-top: 50px; /* Siirretään sisältöä alas yläreunasta */
+}
+.diagram-box {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+}
+.diagram-outer-box {
+    border: 2px dashed #555;
+    padding: 40px 20px 20px 20px;
+    position: relative;
+    margin: 10px;
+    display: inline-block; /* Jotta laatikko asettuu tekstin ympärille */
+}
+.diagram-outer-box > .label {
+    position: absolute;
+    top: -12px; /* Siirretään otsikko reunan päälle */
+    left: 10px;
+    background-color: white; /* Tausta peittää reunan */
+    padding: 0 10px;
+}
+.client-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px; /* Lasketaan selain-komponenttia alemmas */
+}
+.inner-flex-container {
+    display: flex;
+    flex-direction: row; /* Asetetaan laatikot vierekkäin */
+    align-items: flex-start; /* Kohdistetaan laatikot yläreunaan */
+    gap: 10px;
+}
+.arrow-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2px 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+    z-index: 1; /* Varmistaa, että teksti on nuolien päällä */
+}
+.arrow-label-right {
+    position: absolute;
+    top: 10%; /* Sijoitetaan oikean nuolen yläpuolelle */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    background-color: white;
+    padding: 0 5px;
+}
+.arrow-label-left {
+    position: absolute;
+    top: 90%; /* Sijoitetaan vasemman nuolen alapuolelle */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    background-color: white;
+    padding: 0 5px;
+}
+.arrow-connector {
+    position: absolute;
+    top: 150px; /* Säädetty pystysijainti */
+    left: 225px; /* Säädetty sijainti laatikoiden väliin */
+    width: 120px; /* Nuolten välinen etäisyys */
+    height: 100px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Estää nuolta nappaamasta hiiren tapahtumia */
+}
+.arrow {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+}
+.arrow.right {
+    top: 30%;
+}
+.arrow.left {
+    top: 70%;
+}
+.arrow::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+.arrow.right::after {
+    right: -2px;
+    top: -5px;
+    border-left: 12px solid black;
+}
+.arrow.left::after {
+    left: -2px;
+    top: -5px;
+    border-right: 12px solid black;
+}
+
+/* API Arrow Styles */
+.api-arrow-connector {
+    position: absolute;
+    top: 240px; /* Nostettu 10px ylöspäin */
+    left: 235px; /* Säädetty vaakasuuntainen sijainti */
+    width: 120px;
+    height: 60px; /* Kapeampi korkeus vaakasuorille nuolille */
+    pointer-events: none;
+}
+
+.api-arrow-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Poistettu rotaatio */
+    background-color: white;
+    padding: 2px 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.api-arrow {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+}
+
+.api-arrow.right {
+    top: 30%;
+}
+
+.api-arrow.left {
+    top: 70%;
+}
+
+.api-arrow::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.api-arrow.right::after {
+    right: -2px;
+    top: -5px;
+    border-left: 12px solid black;
+}
+
+.api-arrow.left::after {
+    left: -2px;
+    top: -5px;
+    border-right: 12px solid black;
+}

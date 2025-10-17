@@ -29,11 +29,25 @@
             ja kääntää sen itse. Itse käytän Windows-ympäristöä mutta ohjelmat ovat komentorivipohjaisiaja alustariippumattomia joten ne voi kääntää  haluamaan ympäristöön.
         </p>
         <h3>Returnkey</h3>
-        <p>
+        <p style="overflow: auto;">
             Ohjelma palauttaa kirjautumisavaimen jota  jokainen sovellus käyttää jatkossa. API-käyttöön tulee tehdä käyttäjä-hallinnassa tunnus.
-            minkä kertakäyttöinen avain annataan parametrina ohjelmalle ja API-kutsu palauttaa sitten pysyvän avaimen.
+            minkä kertakäyttöinen avain annataan parametrina ohjelmalle ja API-kutsu palauttaa sitten pysyvän avaimen ja luo settings.txt-tiedoston 
+			sitä sitten käytetään jatkossa muidan API:a käyttävien ohjelmien asetustiedostona.
+        </p>
+	  <p style="overflow: auto;">
             <img src="apiavain.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
             <img src="returnkey.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+        </p>
+		<h3>Loadstamps</h3>
+        <p style="overflow: auto;">
+            Ohjelma palauttaa leimaukset palvelimelta. Tähän tarvitaan Returkey ohjelman luoma asetustiedosto.
+			Ohjelma muodostaa tiedoston stamps.csv jonka voi lukea vaikkapa exceliin. Ohjelma on vielä kesken tarkoitus on että 
+			tietojen haun jälkeen ja kun on varmistettu että tiedot on käsitelty niin ajatus on että api-kutsulla kerrotaan järjestelmään 
+			poisto kutsu siirretyille leimauksille.
+        </p>
+        <p style="overflow: auto;">
+            <img src="leimaussiirto1.png" alt="Leimaussiirto aloitus" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="leimaussiirto2.png" alt="Leimaussiirto lopetus" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
         </p>
     </article>
     <script>
