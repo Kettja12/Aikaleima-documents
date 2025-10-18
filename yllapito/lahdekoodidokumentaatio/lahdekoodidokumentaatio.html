@@ -94,8 +94,8 @@
         <a href="kayttoliittymakomponentit/kayttoliittymakomponentit.html" class="btn btn-outline-secondary">käyttöliittymä komponentit</a>
 
         <pre data-src="User.razor" class="language-html"></pre>
-
-
+        <pre data-src="User.razor.cs" class="language-csharp"></pre>
+       
     </p>
     <h3>Domain</h3>
     <p>
@@ -108,6 +108,12 @@
         Tämän avulla voidaan kuitenkin toteuttaa välimuisti (cache), jolloin tietoa ei tarvitse hakea uudestaan, jos se on jo muistissa. Tämä toimii, mikäli sama arvo (ns. `CurrentStampcategory`) on sopiva kaikille tilan moduuleille.
         Parempi implementaatio olisi palauttaa arvo:
     <pre data-src="SelectStampcategoryAsync2.cs" class="language-csharp"></pre>
+    </p>
+        Esimerkki model-luokasta UserModel.cs.
+        <pre data-src="UserModel.cs" class="language-csharp"></pre>
+    <p>
+
+
     </p>
     <h3>Tila</h3>
     <p>
