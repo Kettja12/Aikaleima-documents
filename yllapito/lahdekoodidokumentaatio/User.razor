@@ -1,0 +1,70 @@
+﻿<Message Refresh="state.Refresh" />
+<div class="mb-3">
+	<button type="button" @onclick="state.UserModel.AddUser" class="btn btn-primary">Lisää käyttäjä</button>
+</div>
+<div class="mb-3">
+	<label for="name" class="form-label">Käyttäjän nimi</label>
+	<input type="text" class="form-control" id="name" @bind="state.UserModel.User.Name">
+</div>
+<div class="mb-3">
+	<label class="form-label">Rekisteröintiavaimen luonti</label>
+
+	@if (state.UserModel.User.Token.Length == 6)
+	{
+		<div class="mb-3">
+			<label for="Token" class="form-label">Rekisteröintiavain</label>
+			<span>@state.UserModel.User.Token</span>
+		</div>
+	}
+	<div class="form-check mb-3">
+		<input class="form-check-input" type="checkbox" name="pincode" id="pincode"
+			   @bind="state.UserModel.User.Pincode">
+		<label class="form-check-label" for="pincode">
+			Pin-koodi käytössä
+		</label>
+	</div>
+
+
+	@if (state.UserModel.User.Id != 0)
+	{
+		@if (state.UserModel.User.Activated)
+		{
+			<div class="form-check mb-3">
+				<input class="form-check-input" type="checkbox" name="activated" id="activated"
+					   @bind="state.UserModel.User.Activated" readonly>
+				<label class="form-check-label" for="activated">
+					Aktivoitu
+				</label>
+			</div>
+		}
+		<button type="button" @onclick="state.UserModel.SendRegistrationKey" class="btn btn-primary">
+			Luo uusi rekisteröintiavain
+		</button>
+	}
+</div>
+<button type="button" @onclick="SaveUser" class="btn btn-primary">Tallenna käyttäjä</button>
+@code {
+	[Inject] State state { get; set; } = default!;
+
+	[Parameter] public int UserId { get; set; }
+	[Parameter] public EventCallback<int> UserChangedAsync { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await state.UserModel.SelectUserAsync(UserId);
+	}
+	public async Task SaveUser()
+	{
+		await state.UserModel.SaveUser();
+		if (UserId != state.UserModel.User.Id)
+		{
+			await UserChangedAsync.InvokeAsync(state.UserModel.User.Id);
+		}
+	}
+	public async Task SendRegistrationKey()
+	{
+		await state.UserModel.SendRegistrationKey();
+	}
+
+
+}

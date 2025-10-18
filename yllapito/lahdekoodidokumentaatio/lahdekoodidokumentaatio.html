@@ -1,0 +1,133 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // Ladataan yhteinen header-osio
+        fetch('/_header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+    <link rel="stylesheet" href="lahdedokumentaatio.css">
+ </head>
+<body>
+<h2>Lähdekoodidokumentaatio</h2>
+<div class="alert alert-info" role="alert">
+  <strong>Huom!</strong> Tämän dokumentaation kuvaama lähdekoodi ei ole julkisesti saatavilla. Pääset tutustumaan siihen ottamalla yhteyttä projektin omistajaan <a href="https://github.com/Kettja12" target="_blank" rel="noopener noreferrer" class="alert-link">GitHub-profiilin</a> kautta.
+</div>
+<p>
+	Tämän dokumentaation painopiste on lähdekoodissa. Mikäli <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor">Blazor</a> ei ole tuttu, paras tietolähde sen kotisivujen jälkeen on YouTube.
+	Paras ohjelmointiympäristö on mielestäni ilmainen <a href="https://visualstudio.microsoft.com/vs/community/">Visual Studio Community</a>,
+	ei ainoastaan Blazor-sovellusten, vaan yleisemminkin <a href="https://dotnet.microsoft.com/en-us/">.NET</a>-sovellusten rakentamiseen.
+</p>
+<p>
+    Sovelluksen suunnittelumalli on modulaarinen monoliitti. Jos termi ei ole tuttu, kyseessä on arkkitehtuurimalli, jossa sovellus on jaettu useisiin itsenäisiin moduuleihin, mutta kaikki moduulit toimivat yhdessä yhtenä kokonaisuutena.
+    Tämä malli tarjoaa etuja, kuten helpomman ylläpidon ja kehityksen, koska moduulit voidaan kehittää ja testata erikseen, mutta ne jakavat saman sovellusympäristön.
+    Mitä se sitten tarkoittaa? Se tarkoittaa, että sovelluksen eri osat on jaettu selkeisiin osioihin, joita kutsutaan myös moduuleiksi, ja jotka käännetään yhdeksi kokonaisuudeksi. Ohjelmistokehityksen trendit ovat viime vuosina suosineet mikropalveluarkkitehtuuria, jossa sovellus jaetaan pieniin, itsenäisiin palveluihin.
+    Modulaarinen monoliitti tarjoaa kuitenkin tasapainon monoliittisen ja mikropalveluarkkitehtuurin välillä, jolloin kehittäjät voivat hyödyntää molempien mallien etuja.
+</p>
+
+<div class="diagram-container">
+    <div class="client-column">
+        <div class="diagram-outer-box">
+            <div class="label">Selain ja verkkosivu</div>
+            <div class="diagram-box">
+                Käyttöliittymä
+            </div>
+        </div>
+        <div class="diagram-box" style="width: 200px; margin-top: 50px;">
+            Android/Windows client
+        </div>
+    </div>
+
+    <div class="diagram-outer-box" style="width: 420px; min-height: 240px;">
+        <div class="label">Palvelin</div>
+        <div class="inner-flex-container">
+            <div class="diagram-box" style="width: 200px; min-height: 200px;">
+                Blazor server prosessi
+            </div>
+            <div class="diagram-box">
+                Tietokanta
+            </div>
+        </div>
+    </div>
+    <div class="arrow-connector">
+        <div class="arrow-label-right">click, jne...</div>
+        <div class="arrow-label-left">DOM-päivitykset</div>
+        <div class="arrow-text">SignalR</div>
+        <div class="arrow right"></div>
+        <div class="arrow left"></div>
+    </div>
+    <div class="api-arrow-connector">
+        <div class="api-arrow-text">api-rajapinta</div>
+        <div class="api-arrow right"></div>
+        <div class="api-arrow left"></div>
+    </div>
+
+</div>
+<article>
+    <h2>Sovelluksen rakenne</h2>
+    <p>
+        Lähdekoodissa sovellus koostuu seuraavista moduuleista.
+    </p>
+    <h3>Sovellus ydintoiminnot</h3>
+    <p>
+        Ydintoiminnot hoitavat sovelluksen käynnistyksen, konfiguroinnin ja HTTP-pyyntöjen käsittelyn.
+        Ne vastaavat myös palveluista, eri näkymien renderöinnistä ja käyttäjän syötteiden välittämisestä käyttöliittymäkomponenteille.
+        <a href="https://github.com/Kettja12/aikajana-ssr/blob/e072c1b609c987aa242d944edb39cef923bf0fcd/Program.cs?plain=1#L5C1-L5C50" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Katso Program.cs GitHubissa</a>
+ 
+        <pre data-src="Program.cs" class="language-csharp"></pre>
+
+    </p>
+    <h3>Käyttöliitymä komponentit</h3>
+    <p>
+        Komponentit löytyvät lähdekoodista 'Components'-kansiosta, ja ne on jaettu kolmeen pääryhmään: Common, Layout ja Pages.
+        'Pages'-kansiossa sijaitsevat sovelluksen eri näkymät (esim. users.razor). Näkymällä voi olla erillinen taustakooditiedosto (users.razor.cs), joka käsittelee näytön toiminnallisuuden.
+        Toiminnallisuus voi kuitenkin sijaita myös suoraan näkymätiedostossa `@code`-lohkossa, jos koodia on vähän. Tällöin on helpompaa hahmottaa HTML-rakenne ja siihen liittyvät toiminnot samanaikaisesti.
+        Jokainen näkymä luo latautuessaan itseään vastaavan model-luokan Domain-moduulista ja yleensä sijoittaa sen State-moduuliin. Käyttöliittymän komponentit käyttävät State-moduulia ja sen sisältämiä luokkia
+        näytettävien tietojen esittämiseen ja syötteiden käsittelyyn.
+        <a href="kayttoliittymakomponentit/kayttoliittymakomponentit.html" class="btn btn-outline-secondary">käyttöliittymä komponentit</a>
+
+        <pre data-src="User.razor" class="language-html"></pre>
+
+
+    </p>
+    <h3>Domain</h3>
+    <p>
+        Domain-moduuli sisältää jokaista näkymää vastaavan luokan (esim. `Users.model`). Model-luokka sisältää kaiken näytön tarvitseman toimintalogiikan ja metodit, jotka hakevat tiedot Repository-moduulista.
+        Model-luokka on tietoinen State-luokasta ja pääsee sen kautta tarpeen mukaan käsiksi muihin tilan model-luokkiin. Näin toteutetaan esimerkiksi tilanne, jossa `DeviceModel` tarvitsee leimauslajeja: se voi kutsua
+        `state.StampcategoryModel`-luokan metodeja, kuten `state.StampcategoryModel.SelectStampcategory(2345);`.
+        Joka on tässä tapauksessa seuraavan kaltainen metodi:
+    <pre data-src="SelectStampcategoryAsync1.cs" class="language-csharp"></pre>
+        Esimerkki on hieman yksinkertaistettu, koska `StampCategoryModel`-luokassa on oletuksena vain yksi `Stampcategory`-ominaisuus.
+        Tämän avulla voidaan kuitenkin toteuttaa välimuisti (cache), jolloin tietoa ei tarvitse hakea uudestaan, jos se on jo muistissa. Tämä toimii, mikäli sama arvo (ns. `CurrentStampcategory`) on sopiva kaikille tilan moduuleille.
+        Parempi implementaatio olisi palauttaa arvo:
+    <pre data-src="SelectStampcategoryAsync2.cs" class="language-csharp"></pre>
+    </p>
+    <h3>Tila</h3>
+    <p>
+        Tila (State) on luokka, joka hoitaa sovelluksen tilanhallinnan. Tila on passiivinen, ja jokaisella käyttäjällä on oma, erillinen tilansa.
+    </p>
+        
+    </p>
+    <h3>Repository</h3>
+    <p>
+        Repository on DLL-moduuli, joka hoitaa tietokantaoperaatiot.
+        Repository-moduulin rajapinta koostuu kolmesta osasta: pyynnöistä (request), vastauksista (response) ja palveluista (services).
+        Repositoryn `Services`-luokka toteuttaa kaikki palvelut, ja sen metodeja kutsutaan muualta koodista.
+        Palvelut ovat funktioita, jotka suorittavat tietyn toiminnon. `Request`-parametrilla kerrotaan toiminnolle tarvittavat tiedot, ja `Response` palauttaa toiminnon tuloksen.
+    </p>
+    <h3>Shared</h3>
+    <p>
+        Shared on DLL-moduuli, joka sisältää jaetut luokat, kuten API-rajapinnan data-mallit.
+    </p>
+    <h3>API</h3>
+    <p>
+        API-osio sisältää reititysmääritykset, jotka alustetaan sovelluksen käynnistyessä. Nämä reitit palvelevat kaikkia API-asiakkaita.
+    <pre data-src="routes.cs" class="language-csharp"></pre>
+    </p>
+
+</article>
+</body>
+</html>

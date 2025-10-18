@@ -1,6 +1,6 @@
 #etc/systemd/system
 [Unit]
-Description=Timestamp Admin server
+Description=aikaleima ssr server
 
 [Service]
 WorkingDirectory=/usr/share/homesite/ssr

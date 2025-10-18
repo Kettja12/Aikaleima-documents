@@ -1,0 +1,15 @@
+<html>
+<head>
+   <meta charset="UTF-8">
+    <script>
+        // Ladataan yhteinen header-osio
+        fetch('/_header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+</head>
+<body>
+</body>
+</html>

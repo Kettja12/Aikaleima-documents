@@ -7,3 +7,10 @@ body{
 }
 p {
 }
+pre[class*="language-"] {
+    display: block;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: .375rem; /* Bootstrap border-radius */
+}
+ 
