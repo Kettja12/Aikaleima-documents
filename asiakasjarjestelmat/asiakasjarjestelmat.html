@@ -2,14 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script>
-        // Ladataan yhteinen header-osio
-        fetch('/_header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
-    </script>
+    <title>Lähdekoodidokumentaatio</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
 </head>
 <body>
     <article>
@@ -27,9 +30,16 @@
         </p>
     </article>
     <article>
+        <h2>Shared</h2>
+            <p style="overflow: auto;">
+            <img src="shared.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Shared kansio sisältää sovelluksille yhteiset komponentit.
+        </p>
+    </article>
+    <article>
         <h2>Malliohjelmat sovelluksen API-rajapinnan hyodyntämisen </h2>
         <p>
-            Nyt ensimmäinen ohjelma on toteutettu. Ohjelma on on toteutettu RUST-kielellä ja voi ladata  GitHubista <a href="https://github.com/Kettja12/Aikaleima-Console">Aikaleima-Console repository</a>
+            Nyt pari ohjelmaa on toteutettu. Ohjelmat on on toteutettu RUST-kielellä ja voi ladata  GitHubista <a href="https://github.com/Kettja12/Aikaleima-Console">Aikaleima-Console repository</a>
             ja kääntää sen itse. Itse käytän Windows-ympäristöä mutta ohjelmat ovat komentorivipohjaisiaja alustariippumattomia joten ne voi kääntää  haluamaan ympäristöön.
         </p>
         <h3>Returnkey</h3>
@@ -37,10 +47,13 @@
             Ohjelma palauttaa kirjautumisavaimen jota  jokainen sovellus käyttää jatkossa. API-käyttöön tulee tehdä käyttäjä-hallinnassa tunnus.
             minkä kertakäyttöinen avain annataan parametrina ohjelmalle ja API-kutsu palauttaa sitten pysyvän avaimen ja luo settings.txt-tiedoston 
 			sitä sitten käytetään jatkossa muidan API:a käyttävien ohjelmien asetustiedostona.
+              <pre data-src="returnkey.main.rs" class="language-rust"></pre>
+
         </p>
 	  <p style="overflow: auto;">
             <img src="apiavain.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
             <img src="returnkey.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="returnkey2.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
         </p>
 		<h3>Loadstamps</h3>
         <p style="overflow: auto;">
@@ -48,6 +61,7 @@
 			Ohjelma muodostaa tiedoston stamps.csv jonka voi lukea vaikkapa exceliin. Ohjelma on vielä kesken tarkoitus on että 
 			tietojen haun jälkeen ja kun on varmistettu että tiedot on käsitelty niin ajatus on että api-kutsulla kerrotaan järjestelmään 
 			poisto kutsu siirretyille leimauksille.
+            <pre data-src="loadstamps.main.rs" class="language-rust"></pre>
         </p>
         <p style="overflow: auto;">
             <img src="leimaussiirto1.png" alt="Leimaussiirto aloitus" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />

@@ -1,14 +1,17 @@
 <html>
 <head>
-   <meta charset="UTF-8">
-    <script>
-        // Ladataan yhteinen header-osio
-        fetch('/_header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
-    </script>
+    <meta charset="UTF-8">
+    <title>Käyttöliittymäkomponentit</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
 </head>
 <body>
 </body>

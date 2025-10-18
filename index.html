@@ -1,107 +1,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script>
-        // Ladataan yhteinen header-osio
-        fetch('/_header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
-    </script>
-    <style>
-        .diagram-container {
-            position: relative;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            min-height: 400px;
-            margin: 40px auto; /* Center the container */
-            width: fit-content; /* Adjust width to content */
-        }
+    <title>Aikaleimapalvelu</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
 
-        .circle-container {
-            position: relative;
-            z-index: 2;
-        }
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+    <script src="/js/prism-file-highlight.js"></script>
 
-        .circle-link {
-            width: 150px;
-            height: 150px;
-            background-color: #007bff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            transition: background-color 0.3s;
-        }
+    <link rel="stylesheet" href="index.css">
 
-            .circle-link:hover {
-                background-color: #0056b3;
-                color: white;
-                text-decoration: none;
-            }
-
-        .square-link {
-            width: 150px;
-            height: 150px;
-            background-color: #28a745;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            transition: background-color 0.3s;
-            margin-bottom: 50px;
-            position: relative;
-            z-index: 2;
-        }
-
-            .square-link:hover {
-                background-color: #218838;
-                color: white;
-                text-decoration: none;
-            }
-
-        .connecting-line {
-            position: relative;
-            background-color: #6c757d;
-            z-index: 1;
-        }
-
-        .line-top {
-            margin-top: -50px; /* From top of circle to square above */
-            width: 8px;
-            height: 50px;
-            transform: translateX(-50%);
-        }
-
-        .line-bottom {
-            top: 10 px; /* From bottom of circle to square below */
-            width: 8px;
-            height: 50px;
-            transform: translateX(-50%);
-        }
-
-        .line-right {
-            top: -20px;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 8px;
-        }
-
-        .line-diagonal {
-            top: 90px; /* Ylläpito-laatikon yläreunan taso */
-            left: -220px; /* Ensimmäisen sarakkeen oikea reuna */
-            width: 120px; /* Viivan pituus */
-            height: 8px;
-            background-color: #6c757d;
-            z-index: 100;
-            transform: rotate(135deg);
-        }
-    </style>
 </head>
 <body>
     <article>
@@ -165,13 +77,14 @@
              data-bs-placement="right"
              title="Ylläpito clientista tehdään siirtotiedostoja asiakasjärjestelmille"></div>
     </div>
-
     <script>
-        // Initialize all tooltips on the page
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        window.onload = function() {
+            // Initialize all tooltips on the page
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        }
     </script>
 
     <footer class="footer mt-5 py-3 bg-light">
