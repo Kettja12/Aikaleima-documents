@@ -1,0 +1,76 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lähdekoodidokumentaatio</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
+    <link rel="stylesheet" href="lahdekoodidokumentaatio.css">
+
+</head>
+<body>
+<h2>Lähdekoodidokumentaatio</h2>
+<div class="alert alert-info" role="alert">
+  <strong>Huom!</strong> Tämän dokumentaation kuvaama lähdekoodi ei ole julkisesti saatavilla. Pääset tutustumaan siihen ottamalla yhteyttä projektin omistajaan <a href="https://github.com/Kettja12" target="_blank" rel="noopener noreferrer" class="alert-link">GitHub-profiilin</a> kautta.
+</div>
+<p>
+    Leimaussovellus on toteutettu <a href="https://dotnet.microsoft.com/en-us/apps/maui">.NET MAUI:lla</a>. 
+    Sovelluskehitys MAUIlla on kieltämättä haastavaa, jos ei ole aiempaa kokemusta Windows-ohjelmoinnista ja XAML:sta. Pitäisin sitä kuitenkin
+    helpompana kuin perinteistä Android-kehitystä vaikkapa <a href="https://kotlinlang.org/">Kotlinilla</a>. 
+    Muun muassa siitä syystä, että ohjelmointikieli on C#.   
+</p>
+  <h3>Projektinrakenne</h3>
+        <div style="overflow: auto;">
+            <img src="projektinrakenne.png" alt="Projektinrakenne" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <p>
+            Helpoin tapa lähestyä aihetta lienee perehtyä ensin projektin rakenteeseen. Kun lähdetään ylhäältä alas, 
+            ensimmäisenä on Shared.dll. Se on tuttu ylläpitosovelluksen puolelta ja sisältää rajapinnan, jota tarvitaan tietojen tuontiin ja vientiin ylläpitosovelluksesta.
+                <a href="https://github.com/Kettja12/Aikaleima-shared/blob/b650db784dda40da381789b9dd7168979a775336/Shared.csproj?plain=1" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Shared-dll</a>
+            
+        </p>
+            <p>
+                Sitten on varsinainen sovellus nimeltään Timestamp. Ohjelmassa ensimmäinen lohko on Data. Se sisältää paikallisen
+                tietokannan käsittelyn. Tietokanta on SQLite, kuten lähes kaikissa Android-sovelluksissa.  
+                WebApiServicestä löytyy sitten API-kutsujen käsittely.  
+            </p>
+            <p>
+                Models-kansiosta löytyvät sovelluksessa käytettävät tietorakenteet. Periaatteessa voitaisiin käyttää myös 
+                Shared-moduulista löytyviä request/response-rakenteita, mutta nyt toteutus on tehty näin.
+            </p>
+            <p>
+                PageModels-kansiosta tulee vastaan ylläpitosovelluksesta tutut sivukohtaiset Model-rakenteet. 
+                Sillä erotuksella, että nyt ei käytetä State-luokkaa niiden hallinnointiin, vaan jokainen model on oma instanssinsa, 
+                joka luodaan käynnistyksen yhteydessä. Model-luokka ei ole myöskään yksinkertainen luokka, vaan sen perusluokka
+                 on ObservableObject. Sen avulla toteutetaan datan synkronointi luokan ja käyttöliittymäkoodin välillä.   
+            </p>
+            <p>
+                Pages-kansiosta löytyy sitten käyttöliittymän näytöt, yksi per model. Kai näytölle voi laittaa muunkin 
+                kuin `x:DataType="pageModels:MainPageModel"` -asetuksen. Esimerkiksi voisi kuvitella 
+                `x:DataType="pageModels:State"`, jolloin kaikki taustakoodi olisi yhdessä State-luokassa, mutta en ole kokeillut sitä.
+            </p>
+            <p>
+                Platforms-kansiossa on ympäristöt, joihin sovelluksen voi kääntää. En ole ehtinyt kokeilla muita kuin 
+                kehitysvaiheessa käyttämääni Windows-ympäristöä ja Android-ympäristöä.  
+            </p>
+            <p>
+                Resources sisältää nimensä mukaisesti kuvakkeet, fontit ja tyylimääritykset.<br> 
+                Services-kansio olisi periaatteessa oikea paikka WebApiService-luokalle, mutta se on nyt mielestäni loogisemmassa paikassa, 
+                josta se löytyy helpommin.<br>
+                Utilities-kansioon nimensä mukaan pitäisi laittaa yleiskäyttöiset metodit. 
+            </p>
+            <p>
+                Viimeisenä ovat sovelluksen juuressa olevat tiedostot. Niistä kannattaa mainita 
+                <a href="https://github.com/Kettja12/aikaleima-app/blob/be257a8a3f21841b0d08544339e9859035d8a02d/MauiProgram.cs?plain=1" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">MauiProgram.cs</a>
+                joka on varsinainen sovelluksen käynnistystiedosto ASP.NET Coren tapaan. Keystore-tiedostoa tarvitaan, kun Android-versio allekirjoitetaan,
+                jotta se voidaan asentaa puhelimeen. Sen ei tietenkään tarvitse olla projektin kansiossa, eikä sitä saa tallentaa versionhallintaan.      
+            </p>
+        </div>
+</body>
+</html>

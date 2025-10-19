@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Domain-komponentit</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
+</head>
+<body>
+    <article>
+    <h2>Domain-komponentit</h2>
+    <p style="overflow: auto;">
+      <img src="domain.png" alt="domain" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+
+        <a href="https://github.com/Kettja12/aikajana-ssr/blob/e072c1b609c987aa242d944edb39cef923bf0fcd/Domain/?plain=1"
+         class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Domain-kansio</a>
+        sisältää jokaista näkymää vastaavan luokan (esim. `Users.model`). Model-luokka sisältää kaiken näytön tarvitseman toimintalogiikan ja metodit, 
+        jotka hakevat tiedot Repository-moduulista State-luokan kautta Services-metodeilla.
+        Model-luokka on tietoinen State-luokasta ja pääsee sen kautta tarpeen mukaan käsiksi muihin tilan model-luokkiin. Näin toteutetaan esimerkiksi tilanne, jossa `DeviceModel` tarvitsee leimauslajeja: se voi kutsua 
+        `state.StampcategoryModel`-luokan metodeja, kuten `state.StampcategoryModel.SelectStampcategory(2345);`.
+    </p>
+    <h3>Tila</h3>
+    <p>
+        <a href="https://github.com/Kettja12/aikajana-ssr/blob/e072c1b609c987aa242d944edb39cef923bf0fcd/Domain/State.cs?plain=1"
+         class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Tila (State)</a>
+        on luokka, joka hoitaa sovelluksen tilanhallinnan. Jokaisella käyttäjällä on oma instanssinsa tilasta selaimen istunnon ajan, 
+        samalla tavalla kuin Web Forms -sovelluksissa `Session`-olio. Tila on osa domain-kerrosta, ja luokka huolehtii domain-objekteista.
+        Koodista näkee, että kun State-luokka luodaan, se saa parametrinaan Services-luokan, jota sitten tila itse tai modelit käyttävät.
+        <pre data-src="State.cs" class="language-csharp"></pre>
+    </p>
+    <h3>Esimerkki UserModel-luokka</h3>
+    <p>
+        Kuvasta näkee, kuinka luokan instanssi on `partial State` -luokassa. Kun luokasta luodaan instanssi, se saa parametrina State-luokan instanssin. 
+        Huomaa, kuinka luokka käyttää State-luokan Services-metodeja tietojen hakuun ja tallennukseen. 
+        <pre data-src="UserModel.cs" class="language-csharp"></pre>
+    </p>
+    </article>
+</body>
+</html>

@@ -14,5 +14,41 @@
 
 </head>
 <body>
+    <article>
+    <h2>Käyttöliittymäkomponentit</h2>
+    <p style="overflow: auto;">
+      <img src="kayttoliittymakomponentit.png" alt="kayttoliittymakomponentit" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+        Komponentit on jaettu kolmeen pääryhmään: Common, Layout ja Pages.
+        'Pages'-kansiossa sijaitsevat sovelluksen eri näkymät (esim. users.razor). Näkymällä voi olla erillinen taustakooditiedosto (users.razor.cs), joka käsittelee näytön toiminnallisuuden.
+        Toiminnallisuus voi kuitenkin sijaita myös suoraan näkymätiedostossa `@code`-lohkossa, jos koodia on vähän. Tällöin on helpompaa hahmottaa HTML-rakenne ja siihen liittyvät toiminnot samanaikaisesti.
+        Jokainen näkymä käynnistyessään lataa State-luokassa olevan instanssin modelista. Jos sitä ei ole vielä ladattu, se suorittaa tietojen haun 
+        ja käyttää saatuja tietoja näytettävien tietojen esittämiseen ja syötteiden käsittelyyn.
+    </p>
+    <p>
+        Esimerkki sivusta jossa taustakoodi on @code lohkossa.    
+        <pre data-src="User.razor" class="language-html"></pre>
+        <pre data-src="User.razor.cs" class="language-csharp"></pre>
+
+    </article>
+    <script>
+         window.onload = function() {
+            // Haetaan kaikki kuvat, jotka ovat <article>-elementtien sisällä
+            const images = document.querySelectorAll('article img');
+
+            // Lisätään jokaiseen kuvaan tapahtumankäsittelijät
+            images.forEach(img => {
+                const originalWidth = img.width; // Tallennetaan alkuperäinen leveys
+
+                img.addEventListener('mouseover', () => {
+                    img.style.width = '600px'; // Muutetaan leveys 600px, kun hiiri on päällä
+                });
+                img.addEventListener('mouseout', () => {
+                    img.style.width = originalWidth + 'px'; // Palautetaan alkuperäinen leveys, kun hiiri poistuu
+                });
+            });
+        }
+    
+</script>
+
 </body>
 </html>
