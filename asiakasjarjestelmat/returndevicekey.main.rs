@@ -25,19 +25,21 @@ async fn main() -> Result<(), reqwest::Error> {
     println!("Palvelin: {}", server_url);
 
     let response = reqwest::Client::new()
-        .post(format!("{}/{}", server_url, shared_api::api_calls::USER_LOG_IN))
+        .post(format!("{}/{}", server_url, shared_api::api_calls::DEVICE_LOG_IN))
         .json(&request)
         .send()
         .await?;
 
     if response.status().is_success() {
-        let user_response: shared_api::responces::UserResponse = response.json().await?;
+        // Jäsennetään vastaus suoraan DeviceResponse-structiksi.
+        // Tämä onnistuu nyt, kun struct vastaa JSON-dataa.
+        let device_response: shared_api::responces::DeviceResponse = response.json().await?;
         println!("Vastaus palvelimelta (jäsennetty):");
-        println!("{:#?}", user_response);
+        println!("{:#?}", device_response);
 
         // Tallennetaan kaikki vastauksen kentät asetustiedostoon
         println!("Päivitetään asetustiedostoa settings.txt...");
-        if let Err(e) = shared_api::methods::save_user_response_settings("settings.txt", &user_response) {
+        if let Err(e) = shared_api::methods::save_device_response_settings("settings.txt", &device_response) {
             println!("Virhe asetusten tallennuksessa: {}", e);
         } else {
             println!("Asetukset tallennettu onnistuneesti.");
