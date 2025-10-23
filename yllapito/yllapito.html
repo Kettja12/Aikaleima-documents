@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ylläpito</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/prism.css">
@@ -17,11 +17,14 @@
 <body>
     <article>
         <h2>Ylläpito</h2>
-		<p> Sovellus on Blazor Server Side webAplikaatio. Eli yksinkertaistettuna perinteinen mainframe-sovellellus streoidella ja graafisena.
-			Kun käyttäjä painaa jotain painiketta tai klikkaa näytällä jotain. Tieto menee palvelimelle ja käsitellään siellä ja palautetaan työasemaan 
-			näyttö uudelleen muotoiltuna uudella datalla. Eli erittäin tietoturvallinen ratkaisu teknisellä tasolla. Sovelluksen rakenne ja toteutus löytyy
-			seuraavan linkin takaa sitä mukaa kun sitä ehtii tekemään.
+		<p> Sovellus on Blazor Server Side web-sovellus. Eli yksinkertaistettuna perinteinen mainframe-sovellus steroideilla ja graafisena.
+			Kun käyttäjä painaa jotain painiketta tai klikkaa jotain näytöllä, tieto menee palvelimelle ja käsitellään siellä. Tämän jälkeen työaseman näyttö palautetaan uudelleen muotoiltuna uudella datalla. Eli erittäin tietoturvallinen ratkaisu teknisellä tasolla. Sovelluksen rakenne ja toteutus löytyy
+			seuraavan linkin takaa sitä mukaa kun sitä ehditään tekemään.
 		</p>
+        <p>
+            Kuvat ovat kehitysversiosta, joka eroaa testiversiosta jonkin verran ulkoasultaan ja toiminnoiltaan.
+           Kuvissa on merkitty punaisella korostuksella kehityksen alla olevat toiminnot. 
+        </p>
         <p>
             <a href="lahdekoodidokumentaatio/lahdekoodidokumentaatio.html" class="btn btn-primary">Lähdekoodidokumentaatio</a>
         </p>
@@ -31,23 +34,29 @@
         <h2>Kirjautuminen</h2>
         <p style="overflow: auto;">
             <img src="kirjautuminen.png" alt="Kirjautuminen" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
-            Kun sovellus käynnistyy, se pyytää ensimmäisellä käyttökerralla kirjautumaan. Kirjautumistunnus on testiympäristössä "testi"
+            Kun sovellus käynnistyy, se pyytää käyttäjää kirjautumaan ensimmäisellä käyttökerralla. Kirjautumistunnus on testiympäristössä "testi"
             ja tuotantoympäristössä asiakaskohtainen tunnus. Kirjautumistoiminnon avulla pääsee laitteella asiakastietojen ylläpitoon.
             Kirjautumisavain on kertakäyttöinen ja se syötetään kirjautumisnäytössä. Kirjautuminen aktivoi tunnuksen ja yksilöi laitteen.
-            Jatkossa ohjelma käyttää omaa sisäistä tapaa yksilöidä tiedonsiirto selaimen ja palvelimen välillä. Sovelluksesta ei kirjauduta ulos,
-            joten selainistunto pysyy kirjautuneena. Mikäli sovellus ei toimi ja vaaditaan uudelleenkirjautuminen,
+            <br>
+            <br>
+            Ohjelma käyttää sisäistä mekanismia tiedonsiirron yksilöimiseen selaimen ja palvelimen välillä. Sovelluksesta ei kirjauduta ulos,
+            joten selainistunto pysyy kirjautuneena. Mikäli sovellus ei toimi ja uudelleenkirjautuminen vaaditaan,
             käyttäjän tulee tilata tunnuksen avaus asiakkaan sopiman käytännön mukaisesti.
-            Kirjautumisavaimen luontitoiminnolla tunnuksella voidaan kirjautua uudelleen samalla tai toisella laitteella.
+            Kirjautumisavaimen luontitoiminnolla käyttäjä voi kirjautua uudelleen samalla tai toisella laitteella.
             Kirjautumistunnus on sidottu selaimeen tai laitteeseen. Samaa tunnusta ei voi myöskään aktivoida toiselle selaimelle tai laitteelle samanaikaiseen käyttöön;
             jokaiselle selaimelle tai laitteelle vaaditaan oma tunnus.
+            <br>
+            <br>
+            Jos kaksivaiheinen tunnistautuminen on käyttäjällä päällä, ohjelman käynnistyessä mahdollisen PIN-koodin syöttämisen jälkeen näytölle tulee ilmoitus "Odotan kirjautumista päätelaitteelta". Käyttäjän pitää silloin mennä leimaussovelluksen kirjautumisvälilehdelle, jossa on ilmoitus "Olet kirjautumassa sovellukseen". Käyttäjän pitää painaa joko "Kirjautuminen" / "Peru kirjautuminen" / "Ilmoita virheellisestä kirjautumisesta" -painiketta.
+            Tämän jälkeen selainikkunassa oleva sovellus kirjautuu sisään. 
         </p>
     </article>
     <article>
         <h2>Kotisivu</h2>
         <p style="overflow: auto;">
             <img src="kotisivu.png" alt="Kotisivu" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
-            Kirjautumisen jälkeen avautuu kotisivu. Kotisivulla on linkit eri toimintoihin. Toiminnot on kuvattu alla. Kotisivulle on jatkossa tavoitteena lisätä tilastoja leimauksista
-            ja virhelokien näyttö.
+            Kirjautumisen jälkeen avautuu kotisivu. Kotisivulla on linkit eri toimintoihin. Toiminnot on kuvattu alla. Kotisivulle on tavoitteena lisätä tilastoja leimauksista
+            sekä virhelokien näyttö.
         </p>
     </article>
 
@@ -56,8 +65,15 @@
         <p style="overflow: auto;">
             <img src="kayttajat.png" alt="Kayttajat" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
             Käyttäjänäytöllä ylläpidetään asiakkaan aikaleimapalvelun ylläpitäjien tietoja. Tyypillisesti 1–2 henkilöä, jotka kirjautuvat omilta työasemiltaan palveluun.
-            Käyttäjäkohtaisesti voidaan laittaa pin-koodi suojaamaan kirjautumista. Käyttäjä antaa haluamansa pin-koodin enimmäisellä kirjautumisella ja se tallentuu palvelimelle.
-            Jatkossa sovelluksen käynnistyessä ohjelma kirjautuu selaimen indexdb kannassa olevalla kirjautumisavaimella ja jos kirjautuminen onnistuu ohjelma vielä kysyy käyttäjän pin-koodin jolla varmistetaan että oikea käyttäjä on kirjautumassa.
+            Käyttäjäkohtaisesti voidaan asettaa PIN-koodi suojaamaan kirjautumista. Käyttäjä antaa haluamansa PIN-koodin ensimmäisellä kirjautumisella ja se tallentuu palvelimelle.
+            <br>
+            <br>
+            Sovelluksen käynnistyessä ohjelma kirjautuu selaimen IndexDB-kannassa olevalla kirjautumisavaimella.
+            <br>
+            Jos kirjautuminen onnistuu ja pin-koodin kysyminen on laitettu käyttäjälle niin ohjelma kysyy vielä käyttäjän PIN-koodin, jolla varmistetaan, että oikea käyttäjä on kirjautumassa.
+            <br>
+            <br>
+            Töissä törmäsin kaksivaiheisen tunnistautumisen esittelyyn, tai MFA:han, kuten sitä tuntuivat kutsuvan. Se tulee kaikissa päivätyön yrityksen ohjelmiin ja käyttö pakollista. Siitä aloin pohtimaan, miten sen voisi toteuttaa yksinkertaisesti. Ohjelman kuvissa näkyy jo, miten ajattelin sen toteuttaa.
         </p>
     </article>
     <article>
@@ -79,8 +95,13 @@
         <p style="overflow: auto;">
             <img src="laitteet.png" alt="Laitteet" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
             Laitteet sisältävät yksilöivän nimitiedon. Laite voi olla henkilökohtainen, kuten puhelinsovellus, jolloin laite kytketään leimaajatiedossa olevaan tietoon.
-            Laite voi olla yleinen leimauspääte, jolloin leimaustilanteessa täytyy leimaajan syöttää henkilökohtainen avain leimaustapahtuman kohdistamiseksi. Laitteen aikatiedot käytetään leimauksen perusteena.
-            Laitteelle voidaan myös laittaa GPS-asetus päälle jolloin leimaustilanteessa tallennetaan leimauksen yhteyteen myös koordinaatit. Ohjelma kysyy oikeutta sijaintitiedon käyttöön enimmäisellä kerralla selaimessa ja puhelimessa.
+            Laite voi olla yleinen leimauspääte, jolloin leimaustilanteessa täytyy leimaajan syöttää henkilökohtainen avain leimaustapahtuman kohdistamiseksi. Laitteen aikatiedot toimivat leimauksen perusteena.
+            <br>
+            <br>
+            Laitteelle voidaan myös kytkeä GPS-asetus päälle, jolloin leimaustilanteessa tallennetaan leimauksen yhteyteen myös koordinaatit. Ohjelma kysyy oikeutta sijaintitiedon käyttöön ensimmäisellä kerralla selaimessa ja puhelimessa.
+            <br>
+            <br>
+            Laitteeseen voidaan kytkeä käyttäjä, jolloin seurauksena on, että käyttäjällä aktivoituu kaksivaiheinen tunnistautuminen. Siitä tarkemmin kirjautumiskohdassa.
         </p>
     </article>
     <article>
@@ -88,9 +109,9 @@
         <p>
         <p style="overflow: auto;">
             <img src="leimaukset.png" alt="Leimaukset" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
-            Laitteet sisältävät yksilöivän nimitiedon. Laite voi olla henkilökohtainen, kuten puhelinsovellus, jolloin laite kytketään leimaajatiedossa olevaan tietoon.
-            Laite voi olla yleinen leimauspääte, jolloin leimaustilanteessa täytyy leimaajan syöttää henkilökohtainen avain leimaustapahtuman kohdistamiseksi. Laitteen aikatiedot käytetään leimauksen perusteena.
-            Listassa näkyy sijaintitiedon ja malliksi nyt laitetu linkki google mapsiin. Kuten kuvasta jo näkee, selaimen antama sijainti ei ole tarkka, mutta puhelimen GPS-tieto on tarkka.
+            <br>
+            <br>
+            Listassa näkyy sijaintitieto ja malliksi nyt lisätty linkki Google Mapsiin. Maps kuvasta jo näkee, että selaimen antama sijainti ei ole tarkka, mutta puhelimen GPS-tieto on tarkka.
         </p>
     </article>
     <article>
@@ -98,8 +119,8 @@
         <p style="overflow: auto;">
             <img src="leimaus.png" alt="Leimaus" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
             Sovelluksella voidaan tehdä myös leimaus. Silloin kuitenkin tulee kirjautua leimaustunnuksella, joka on eri kuin ylläpidon tunnus.
-            jos laite on yleinen leimauspääte, tulee leimaajan syöttää henkilökohtainen avain leimaustapahtuman kohdistamiseksi. Sopivilla lisälaitteilla
-            voidaan käyttää myös viivakoodinlukijaa vaikkapa henkilökortista viivakoodin lukemiseen tai RFID-lukijaa sirulta leimaajan tunnistamiseen.
+            Jos laite on yleinen leimauspääte, tulee leimaajan syöttää henkilökohtainen avain leimaustapahtuman kohdistamiseksi. Sopivilla lisälaitteilla
+            voidaan käyttää myös viivakoodinlukijaa, vaikkapa henkilökortista viivakoodin lukemiseen, tai RFID-lukijaa sirulta leimaajan tunnistamiseen.
         </p>
     </article>
 <script>

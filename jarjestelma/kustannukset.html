@@ -1,0 +1,88 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Virtuaalipalvelin</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+</head>
+<body>
+    <article>
+        <h2>Virtuaalipalvelimen kustannukset</h2>
+        <p style="overflow: auto;">
+            Tällä sivulla kuvataan järjestelmän kustannusrakenne ja pientä vertailua erilaisten palveluiden välillä. Vertailu ei ole kattava, mutta antaa suuntaa kustannuksista.
+            Lähdetään nyt ensin liikkeelle virtuaalipalvelimista. Päivitetään lisää tietoa sitä mukaa kun ehditään kaivaa. Tässä on nyt jotain alustavaa.
+            Kustannukset tähän mennessä vuodeksi eteenpäin 432,97 euroa alv 25,5%. Ei halpa harrastus.
+        </p>
+    <article>
+        <h2>Domain ja sertifikaatit</h2>
+        <p style="overflow: auto;">
+            Järjestelmän domain on aikaleima.fi. Domainin vuotuinen hinta oli  27,32 euroa alv 25,5% vuodessa. 
+            <br>
+            Sertifikaatit tavallinen SSL sertifikaatti vuodeksi  maksaa 74,05 euroa alv 25,5%. 
+            <br>
+            Vaihdoin kutenkin windcard sertifikaattiin ja se maksaa vuodeksi 218,37 euroa alv 25,5%.
+            <br>
+            Yhteensä 245,97 euroa alv 25,5% vuodessa. 
+        </p>
+    </article>
+        <article>
+        <h2>Suomenkielinen vaihtoehto </h2>
+        <p style="overflow: auto;">
+            <img src="domainkeskus.png" alt="Domainkeskus" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <a href="https://www.domainkeskus.com/virtuaalipalvelimet/" class="btn btn-outline-secondary">Domainkeskus</a>
+            Nykyinen palvelun tarjoaja. Nopea asiakaspalvelu ja edullinen hinta. Palvelimet sijaitsee Suomessa. Suomenkielinen asiakaspalvelu.
+            Hinta 15,58 euroa alv 25,5% kuukaudessa eli 187,00 euroa alv 25,5% vuodessa. 
+        </p>
+    </article>
+    </article>
+        <article>
+        <h2>AWS</h2>
+        <p style="overflow: auto;">
+            <img src="AWS.png" alt="AWS" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <a href="https://calculator.aws/#/addService" class="btn btn-outline-secondary">Amazonin pilvipalvelu kustannuslaskuri</a>
+
+            Erittäin laaja palveluvalikoima.  Hyvät työkalut kustannusten laskentaa varten, mutta pitää tietää mitä kaikkea pitää ottaa mukaan.
+            Tietenkin vaatii englanninkielen taidon ja luottokortin käyttö on pakollista.
+        </p>
+    </article>
+    </article>
+        <article>
+        <h2>Azure</h2>
+        <p style="overflow: auto;">
+            <img src="Azure.png" alt="Azure" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <a href="https://azure.microsoft.com/en-us/pricing/calculator" class="btn btn-outline-secondary">Azure kustannuslaskuri</a>
+
+            Erittäin laaja palveluvalikoima.  Hyvät työkalut kustannusten laskentaa varten, mutta pitää tietää mitä kaikkea pitää ottaa mukaan.
+            ero AWS:n  lienee että Azure laskuttaa  jokaisesta transactiosta. Kun kirjoitat tai luet levyä mikäli ymmärsin oikein. 
+            Tietenkin vaatii englanninkielen taidon ja luottokortin käyttö on pakollista.
+        </p>
+    </article>
+<script>
+         window.onload = function() {
+            // Haetaan kaikki kuvat, jotka ovat <article>-elementtien sisällä
+            const images = document.querySelectorAll('article img');
+
+            // Lisätään jokaiseen kuvaan tapahtumankäsittelijät
+            images.forEach(img => {
+                const originalWidth = img.width; // Tallennetaan alkuperäinen leveys
+
+                img.addEventListener('mouseover', () => {
+                    img.style.width = '600px'; // Muutetaan leveys 600px, kun hiiri on päällä
+                });
+                img.addEventListener('mouseout', () => {
+                    img.style.width = originalWidth + 'px'; // Palautetaan alkuperäinen leveys, kun hiiri poistuu
+                });
+            });
+        }
+    
+</script>
+
+</body>
+</html>
