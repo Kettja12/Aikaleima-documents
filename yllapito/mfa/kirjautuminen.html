@@ -1,0 +1,83 @@
+html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lähdekoodidokumentaatio</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
+    <link rel="stylesheet" href="lahdekoodidokumentaatio.css">
+
+</head>
+<body>
+<h2>Kaksivaiheinen tunnistautuminen</h2>
+<p>
+    Kaksivaiheinen tunnistautuminen (MFA, Multi-Factor Authentication) on turvallisuusmenetelmä, joka vaatii käyttäjältä kahta tai useampaa todennustekijää päästäkseen käsiksi järjestelmään tai palveluun.
+    Tämä lisää ylimääräisen suojakerroksen pelkän käyttäjätunnuksen ja salasanan lisäksi, mikä tekee luvattomasta pääsystä vaikeampaa.
+</p>
+    <article>
+        <h2>Käyttäjä</h2>
+        <p style="overflow: auto;">
+            <img src="kayttajat.png" alt="Käyttäjät" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Käyttäjälle jolle kaksivaiheinen tunnistautuminen halutaan päälle tulee liittää päätelaite käyttäjään.
+            tällöin käyttäjä tiedoissa näkyy päätelaitteen tiedot.</p>
+    </article>
+    <article>
+        <h2>Laite</h2>
+        <p style="overflow: auto;">
+            <img src="laitteet.png" alt="Laitteet" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Laitetietoihin tulee luoda henkilökohtainen laite johon käyttäjä asentaa leimaussovelluksen. 
+            Laiteelle tulee laittaa sovellukseen kirjautuminen päälle valitsemalla käyttäjä listasta.
+        </p>
+    </article>
+    <article>
+        <h2>Sovelluksen käynnistyminen</h2>
+        <p style="overflow: auto;">
+            <img src="odotus.png" alt="Odotus" width="301" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="hylatty.png" alt="Hylätty" width="301" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="tuntematon.png" alt="Tuntematon" width="301" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="keskeytyminen.png" alt="Keskeytyminen" width="301" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <div>
+            Kun sovellus käynnistyy, se odottaa käyttäjän kirjautumista päätelaitteelta. Lopputulos riippuu siitä, miten käyttäjä päätelaitteellaan vastaa.
+            Mikäli kirjautuminen ei onnistu ohjautuu ohjelma virhesivulle, jossa on ohjeet käyttäjälle.
+            </div>
+        </p>
+    </article>
+    <article>
+        <h2>Kirjautumisen hyväksyminen</h2>
+        <p style="overflow: auto;">
+            <img src="kirjautuminen.png" alt="Kirjautuminen" width="301" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="kirjaudu.png" alt="Kirjaudu" width="301" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Leimaus-sovelluksessa on välilehti, jossa käyttäjä voi hyväksyä tai hylätä kirjautumisen. Jos kirjautumisen tila on aktiivinen, on painonappit valittavissa.
+    </article>
+
+<script>
+         window.onload = function() {
+            // Haetaan kaikki kuvat, jotka ovat <article>-elementtien sisällä
+            const images = document.querySelectorAll('article img');
+
+            // Lisätään jokaiseen kuvaan tapahtumankäsittelijät
+            images.forEach(img => {
+                const originalWidth = img.width; // Tallennetaan alkuperäinen leveys
+                if (img.width > 300){
+                    return
+                }
+                img.addEventListener('mouseover', () => {
+                    img.style.width = '600px'; // Muutetaan leveys 600px, kun hiiri on päällä
+                });
+                img.addEventListener('mouseout', () => {
+                    img.style.width = originalWidth + 'px'; // Palautetaan alkuperäinen leveys, kun hiiri poistuu
+                });
+            });
+        }
+    
+</script>
+
+</body>
+</html>

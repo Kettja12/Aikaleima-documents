@@ -1,0 +1,139 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lähdekoodidokumentaatio</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
+    <!-- Lisätään Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+    <link rel="stylesheet" href="lahdekoodidokumentaatio.css">
+
+</head>
+<body>
+
+<h2>Repository</h2>
+    <p>
+        <a href="https://github.com/Kettja12/Aikaleima-Repository/blob/48b7dd5a3741d57a53004067ed44a19ac49e3c03/Repository.csproj?plain=1" 
+        class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Repository-dll</a>
+       -moduuli, joka hoitaa tietokantaoperaatiot.
+        Repository-moduulin rajapinta koostuu kolmesta osasta: pyynnöistä (request), vastauksista (response) ja palveluista (services).
+        Repositoryn `Services`-luokka toteuttaa kaikki palvelut, ja sen metodeja kutsutaan muualta koodista.
+        Palvelut ovat funktioita, jotka suorittavat tietyn toiminnon. `Request`-parametrilla kerrotaan toiminnolle tarvittavat tiedot, ja `Response` palauttaa toiminnon tuloksen.
+    </p>
+    <div class="mermaid">
+        graph LR
+            subgraph "Muu sovellus"
+                Caller[Kutsuva koodi]
+            end
+        
+            subgraph Repository
+                Services[Services-luokka]
+                Request[Request-objekti]
+                Response[Response-objekti]
+                DB[(Tietokanta)]
+            end
+        
+            Caller -- Request --> Services
+            Services -- suorittaa operaation --> DB
+            DB -- tulokset --> Services
+            Services -- Response --> Caller
+    </div>
+
+    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+        <div style="flex: 1;">
+            <h3>Repositoryn sisäinen rakenne</h3>
+            <p>
+                Repository-moduuli hyödyntää C#:n <code>partial</code>-luokkia, joiden avulla sekä palvelulogiikka (<code>Services</code>) että tietokantakonteksti (<code>AppDbContext</code>) on jaettu selkeämpiin, osa-aluekohtaisiin tiedostoihin. Tämä parantaa koodin luettavuutta ja ylläpidettävyyttä. Alla oleva kaavio kuvaa tätä rakennetta.
+            </p>
+        
+            <div class="mermaid">
+            classDiagram
+                direction LR
+        
+                class Services {
+                    +IDbContextFactory~AppDbContext~ factory
+                    +Services(factory)
+                    +AuthenticationCheck(loginToken)
+                    --
+                    .. StampServices ..
+                    +SaveStampAsync(request)
+                    +StampsAsync(request)
+                    +MarkTransferedAsync(request)
+                    +RestoreTransferedAsync(request)
+                    +DeleteTransferedAsync(request)
+                    --
+                    .. StamperServices ..
+                    +StamperNamesAsync(request)
+                    +SaveStamperAsync(request)
+                    --
+                    .. StampCategoryServices ..
+                    +StampcategoryNamesAsync(request)
+                    +SaveStampcategoryAsync(request)
+                    --
+                    .. UserServices ..
+                    +UserAsync(request)
+                    +SaveUserAsync(request)
+                    +LoginAsync(request)
+                    +PinCodeCheckAsync(request)
+                    --
+                    .. DeviceServices ..
+                    +DeviceAsync(request)
+                    +SaveDeviceAsync(request)
+                    +DeviceLoginAsync(request)
+                    --
+                    .. MFAServices ..
+                    +CreateMFAAsync(request)
+                    +UserCheckMFAStateAsync(request)
+                }
+        
+                Services "1" -- "1" AppDbContext : käyttää
+        
+            </div>
+        </div>
+        <div style="flex: 1;">
+            <h3>AppDbContext-luokan rakenne</h3>
+            <p>
+                Vastaavasti kuin <code>Services</code>-luokka, myös <code>AppDbContext</code> on jaettu osiin <code>partial</code>-avainsanalla. Jokainen sovelluksen pääentiteetti (kuten <code>User</code>, <code>Stamp</code>, <code>Device</code>) saa oman <code>DbSet</code>-määrittelynsä omassa tiedostossaan. Tämä selkeyttää projektin rakennetta, kun kuhunkin toiminnallisuuteen liittyvä tietokantataulun määrittely löytyy omasta kansiostaan.
+            </p>
+        
+            <div class="mermaid">
+            classDiagram
+                direction LR
+        
+                class AppDbContext {
+                    %% partial class
+                    +AppDbContext(options)
+                    --
+                    .. Users/Context.cs ..
+                    +DbSet~User~ Users
+                    --
+                    .. Devices/Context.cs ..
+                    +DbSet~Authentication~ Devices
+                    --
+                    .. Stamps/Context.cs ..
+                    +DbSet~Stamp~ Stamps
+                    --
+                    .. Stampers/Context.cs ..
+                    +DbSet~Stamper~ Stampers
+                    --
+                    .. StampCategories/Context.cs ..
+                    +DbSet~Stampcategory~ Stampcategories
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+        // Alustetaan Mermaid
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
