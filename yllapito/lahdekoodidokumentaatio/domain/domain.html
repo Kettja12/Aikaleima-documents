@@ -12,6 +12,9 @@
     <script src="/js/prism.js" data-manual></script>
     <script src="/js/prism-file-highlight.js"></script>
 
+    <!-- Lisätään Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
 </head>
 <body>
     <article>
@@ -26,6 +29,48 @@
         Model-luokka on tietoinen State-luokasta ja pääsee sen kautta tarpeen mukaan käsiksi muihin tilan model-luokkiin. Näin toteutetaan esimerkiksi tilanne, jossa `DeviceModel` tarvitsee leimauslajeja: se voi kutsua 
         `state.StampcategoryModel`-luokan metodeja, kuten `state.StampcategoryModel.SelectStampcategory(2345);`.
     </p>
+    <h3>Luokkakaavio</h3>
+    <div class="mermaid">
+        classDiagram
+            direction LR
+        
+            class State {
+                +Services _services
+                +UserModel UserModel
+                +DeviceModel DeviceModel
+                +StampModel StampModel
+                +StamperModel StamperModel
+                +StampcategoryModel StampcategoryModel
+                +State(services)
+            }
+        
+            class BaseModel {
+                %% abstract
+                #State _state
+                +BaseModel(state)
+            }
+        
+            State "1" *-- "1" UserModel
+            State "1" *-- "1" DeviceModel
+            State "1" *-- "1" StampModel
+            State "1" *-- "1" StamperModel
+            State "1" *-- "1" StampcategoryModel
+        
+            UserModel --|> BaseModel
+            DeviceModel --|> BaseModel
+            StampModel --|> BaseModel
+            StamperModel --|> BaseModel
+            StampcategoryModel --|> BaseModel
+        
+            State --> Services : käyttää
+        
+            class Services {
+                %% Repository
+                +UserAsync(request)
+                +DeviceAsync(request)
+                +...
+            }
+    </div>
     <h3>Tila</h3>
     <p>
         <a href="https://github.com/Kettja12/aikajana-ssr/blob/e072c1b609c987aa242d944edb39cef923bf0fcd/Domain/State.cs?plain=1"
@@ -42,5 +87,9 @@
         <pre data-src="UserModel.cs" class="language-csharp"></pre>
     </p>
     </article>
+    <script>
+        // Alustetaan Mermaid
+        mermaid.initialize({ startOnLoad: true });
+    </script>
 </body>
 </html>
