@@ -1,0 +1,8 @@
+-Wasm Blazor Client -leimaussovellus (2.11.2023)
+--Pieni kokeilu siitä, miten Blazor WebAssembly toimii leimaussovelluksena. Pienenä vastoinkäymisenä jouduin päivittämään .NET 10:n .NET 8:aan, koska 10-versio ei osannut luoda portable-versiota. Mutta mihin muuhunkaan sunnuntaipäivän voisi paremmin käyttää kuin ongelmien ratkomiseen.
+-Sormenjälkitunnistus leimaussovellukseen (1.11.2023)
+--Lisätty sormenjälkitunnistus Android-laitteille. Pientä puuhastelua lauantaipäivän ratoksi. Renderöinnin synkronointi aiheutti aluksi ongelmia, jotka johtivat sovelluksen kaatumiseen. Varsinainen koodi on noin 20 riviä, ja sen päälle tulee tietenkin käynnistysnäyttö.
+-Erillinen WebClient-kirjasto (31.10.2023)
+--Tehty erillinen WebClient-kirjasto, jota leimaussovellus, leimaussivu ja jatkossa ylläpitosovellus käyttävät. Näin saadaan yhteiset toiminnot samaan paikkaan ja helpottaa jatkokehitystä. Kirjasto sisältää funktiorajapinnan, joka suorittaa API-kutsut.
+-Kaksivaiheisen kirjautumisen hyväksyntä leimaussovellukseen (27.10.2023)
+--Selainsovelluksen kirjautumiseen on lisätty kaksivaiheinen tunnistautuminen. Tämä tarkoittaa, että piti toteuttaa myös tapa, jolla kirjautuminen hyväksytään puhelimella. Nyt leimaussovelluksessa on kirjautumisvälilehti, josta käyttäjä voi hyväksyä kirjautumisen, mikäli se on aktiivinen.
