@@ -20,34 +20,37 @@
     <article>
         <h2>Aikaleimapalvelu</h2>
         <p>
-            Aikaleima on palvelu, jolla asiakas voi hallita erilaisia leimaustapahtumia. Järjestelmän ydinosat ovat leimaustietojen hallinta ja leimauspääte. Järjestelmä on asiakaskohtainen ja löytyy osoitteesta asiakas.aikaleima.fi. Tietoihin pääsevät käsiksi vain asiakkaan käyttäjät ja palvelun ylläpitäjä. Tiedot sijaitsevat asiakaskohtaisessa tietokannassa ja leimaustietojen osalta vain sen aikaa, kunnes ne on siirretty asiakkaan järjestelmiin. Siirron jälkeen asiakas voi poistaa tiedot järjestelmästä.
+            Aikaleima on palvelu, jolla asiakas voi hallita erilaisia leimaustapahtumia. Järjestelmän ydinosat ovat leimaustietojen hallinta ja leimauspääte. Järjestelmä on asiakaskohtainen ja löytyy osoitteesta `asiakas.aikaleima.fi`. Tietoihin pääsevät käsiksi vain asiakkaan käyttäjät ja palvelun ylläpitäjä. 
+            Tiedot sijaitsevat asiakaskohtaisessa tietokannassa ja leimaustietojen osalta vain sen aikaa, 
+            kunnes ne on siirretty asiakkaan järjestelmiin. Siirron jälkeen asiakas voi poistaa tiedot järjestelmästä.
         </p>
 		<p>
-		 Järjestelmä/ohjelmisto miksi tätä nyt siten haluaa kutsua on ns. Proof of Consept. Ei kaupallinen versio. Järjestelmällä pyrin testaamaan
-		 miten Blazor Server Side webAplikaatio toimii ns. tuotantoympäristössä. Ja miten  ylläpito ja sovelluksen monistaminen usemalla asiakkalle onnistuu 
-		 mahdollisimman yksinkertaisesti. Jos olet ohjelmoija ja samojen asioiden parissa paininut tai muuten vain kiinnostunut koodista ja/tai konseptista ota yhteyttä. 
-		 AWS:n ja Azuren kanssa painineet ovat varmasti samaa mieltä, että täytyy olla yksinkertaisempi ja halvempi tapa toteuttaa tuotannollisia järjestelmiä.
+		 Järjestelmä/ohjelmisto, miten tätä nyt sitten haluaa kutsua, on niin sanottu "Proof of Concept". Se ei ole kaupallinen versio. Järjestelmällä pyrin testaamaan,
+		 miten Blazor Server Side -verkkosovellus toimii tuotantoympäristössä ja miten ylläpito sekä sovelluksen monistaminen useammalle asiakkaalle onnistuu 
+		 mahdollisimman yksinkertaisesti. Jos olet ohjelmoija ja paininut samojen asioiden parissa tai olet muuten vain kiinnostunut koodista ja/tai konseptista, ota yhteyttä. 
+		 AWS:n ja Azuren kanssa työskennelleet ovat varmasti samaa mieltä siitä, että on olemassa yksinkertaisempi ja halvempi tapa toteuttaa tuotannollisia järjestelmiä.
 		</p>
 		<p>
-			ps. Valitan kirjoitusvirheitä. Kaikkea ei ehdi ja viitsi tarkistuttaa tekoälyllä. 
-            Kansiossa 'en' on toteutettu kielikäännös kokeilu 
+			PS. Pahoittelen mahdollisia kirjoitusvirheitä. Kaikkea ei ehdi tai viitsi tarkistuttaa tekoälyllä. 
+            Kansiossa 'en' on kokeilu kielikäännöksestä, joka on toteutettu 
             <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VS Coden</a> 
             <a href="https://marketplace.visualstudio.com/items?itemName=google.geminicodeassist" 
                 target="_blank" rel="noopener noreferrer">Gemini-laajennuksella</a>.
-                 <a href="en/index.html" title="Switch to English version"><img src="flag_uk.png" alt="English version" style="width: 32px; vertical-align: middle;"></a>
+                 <a href="en/index.html" title="Vaihda englanninkieliseen versioon"><img src="flag_uk.png" alt="Englanninkielinen versio" style="width: 32px; vertical-align: middle;"></a>
 		</p>
         <p>
             <a href="https://testi.aikaleima.fi" class="btn btn-primary">Testi-ympäristöön tästä linkistä. Käyttäjäavaimella testi pääsee ylläpitoon.</a>
         </p>
 
     </article>
+  
 
     <div class="container diagram-container">
         <div class="d-flex flex-column align-items-center">
             <a href="leimaus/leimaus.html" class="square-link"
                data-bs-toggle="tooltip"
                data-bs-placement="right"
-               title="Leimaus tehdään Android-sovelluksella tai selaimessa">Leimaus</a>
+               title="Leimaus tehdään Android-sovelluksella tai selaimella.">Leimaus</a>
             <div class="connecting-line line-top"
                  data-bs-toggle="tooltip"
                  data-bs-placement="right"
@@ -55,15 +58,15 @@
             <a href="jarjestelma/jarjestelma.html" class="circle-link"
                data-bs-toggle="tooltip"
                data-bs-placement="right"
-               title="Järjestelmä on virtuaalipalvelimessa toimiva asiakaskohtainen sovellus">Järjestelmä</a>
+               title="Järjestelmä on virtuaalipalvelimella toimiva asiakaskohtainen sovellus.">Järjestelmä</a>
             <div class="connecting-line line-bottom"
                  data-bs-toggle="tooltip"
                  data-bs-placement="right"
-                 title="Ylläpito clientit on yhteydessä järjestelmään SignalR-rajapinnan kautta"></div>
+                 title="Ylläpito-clientit ovat yhteydessä järjestelmään SignalR-rajapinnan kautta."></div>
             <a href="yllapito/yllapito.html" class="square-link"
                data-bs-toggle="tooltip"
                data-bs-placement="right"
-               title="Ylläpito tehdään selaimella käyttäen palvelimella olevaa sovellusta">Ylläpito</a>
+               title="Ylläpito tehdään selaimella käyttäen palvelimella olevaa sovellusta.">Ylläpito</a>
         </div>
         <div class="d-flex flex-column align-items-start">
             <div class="d-flex align-items-center">
@@ -74,14 +77,14 @@
                 <a href="asiakasjarjestelmat/asiakasjarjestelmat.html" class="square-link"
                    data-bs-toggle="tooltip"
                    data-bs-placement="right"
-                   title="Asiakasjärjestelmät jotka tarvitsevat leimaustietoja saavat ne käyttöönsä tiedostomuodossa tai API-rajapinnan kautta">Asiakasjärjestelmät</a>
+                   title="Asiakasjärjestelmät, jotka tarvitsevat leimaustietoja, saavat ne käyttöönsä tiedostomuodossa tai API-rajapinnan kautta.">Asiakasjärjestelmät</a>
             </div>
         </div>
         <!-- Diagonaalinen viiva Ylläpidon ja Asiakasjärjestelmien välille -->
         <div class="connecting-line line-diagonal"
              data-bs-toggle="tooltip"
              data-bs-placement="right"
-             title="Ylläpito clientista tehdään siirtotiedostoja asiakasjärjestelmille"></div>
+             title="Ylläpito-clientista tehdään siirtotiedostoja asiakasjärjestelmille."></div>
     </div>
     <script>
         window.onload = function() {
@@ -92,6 +95,127 @@
             })
         }
     </script>
+  <article>
+        <h3>Tapahtumaloki</h3>
+        <div style="max-height: 150px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: .25rem; padding: 1rem;">
+      
+        <div class="accordion" id="infoAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading1">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                        2.11.2023 - Wasm Blazor Client -leimaussovellus
+                    </button>
+                </h2>
+                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                    Pieni kokeilu siitä, miten Blazor WebAssembly toimii leimaussovelluksena. Pienenä vastoinkäymisenä jouduin päivittämään .NET 10:n .NET 8:aan, koska 10-versio ei osannut luoda portable-versiota. 
+                      Mutta mihin muuhunkaan sunnuntaipäivän voisi paremmin käyttää kuin ongelmien ratkomiseen. 
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        1.11.2023 - Sormenjälkitunnistus leimaussovellukseen
+                    </button>
+                </h2>
+                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                        Lisätty sormenjälkitunnistus Android-laitteille. Pientä puuhastelua lauantaipäivän ratoksi. 
+                        Renderöinnin synkronointi aiheutti aluksi ongelmia, jotka johtivat sovelluksen kaatumiseen. Varsinainen koodi on noin 20 riviä, ja sen päälle tulee tietenkin käynnistysnäyttö.  
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        31.10.2023 - Erillinen WebClient-kirjasto
+                    </button>
+                </h2>
+                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                        Tehty erillinen WebClient-kirjasto, jota leimaussovellus, leimaussivu ja jatkossa ylläpitosovellus käyttävät. 
+                        Näin saadaan yhteiset toiminnot samaan paikkaan ja helpottaa jatkokehitystä. 
+                        Kirjasto sisältää funktiorajapinnan, joka suorittaa API-kutsut.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading4">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                        27.10.2023 - Kaksivaiheisen kirjautumisen hyväksyntä leimaussovellukseen
+                    </button>
+                </h2>
+                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                        Selainsovelluksen kirjautumiseen on lisätty kaksivaiheinen tunnistautuminen. Tämä tarkoittaa, että piti toteuttaa myös tapa, 
+                        jolla kirjautuminen hyväksytään puhelimella. Nyt leimaussovelluksessa on kirjautumisvälilehti, josta käyttäjä voi hyväksyä kirjautumisen, 
+                        mikäli se on aktiivinen.
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </article>
+    <article>
+        <h3>To Do</h3>
+        <div style="max-height: 150px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: .25rem; padding: 1rem;">
+      
+        <div class="accordion" id="infoAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="Heading1000">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1000" aria-expanded="true" aria-controls="collapse1000">
+                        Ylläpitosovelluksen versio 2
+                    </button>
+                </h2>
+                <div id="collapse1000" class="accordion-collapse collapse show" aria-labelledby="heading1000" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                        Ylläpitosovellus käyttämään WebClient-rajapintaa ja rajapinnan laajennus koskemaan kaikkia tietokantakutsuja.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading1001">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1001" aria-expanded="false" aria-controls="collapse1001">
+                        Tietokannat sovelluksen ulkopuoliseen kansioon
+                    </button>
+                </h2>
+                <div id="collapse1001" class="accordion-collapse collapse" aria-labelledby="heading1001" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                        Siirto mahdollistaa keskitetyn tietokantojen hallinnan ja mahdollisesti Docker-kontit, joissa data tallennetaan kontin ulkopuolelle.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading1003">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1003" aria-expanded="false" aria-controls="collapse1003">
+                        Kaksivaiheisen kirjautumisen erottaminen ylläpitosovelluksesta erilliseksi API-palveluksi
+                    </button>
+                </h2>
+                <div id="collapse1003" class="accordion-collapse collapse" aria-labelledby="heading1003" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                        Ideana on, että sovellukset käyttäisivät erillistä API-rajapintaa, joka sisältää kirjautumispyyntöjä. Puhelinsovelluksessa olisi
+                        oma kuittaus kirjautumiselle ja lisäksi yhden näytön applikaatio, jolla voi tehdä kirjautumisen.
+                        Palvelu ei sinällään tiedä mitään asiakasjärjestelmistä, se vain välittää kirjautumispyyntöjä asiakasjärjestelmän sisäisillä avaimilla.      
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading1004">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1004" aria-expanded="false" aria-controls="collapse1004">
+                        Postgress-tietokanta ylläpitoon
+                    </button>
+                </h2>
+                <div id="collapse1004" class="accordion-collapse collapse" aria-labelledby="heading1004" data-bs-parent="#infoAccordion">
+                    <div class="accordion-body">
+                        Olisi mielenkiintoista testata suorituskykyä. Se ei ole nopeampi kuin prosessin sisäinen kanta ja jo nyt leimaustapahtumien API-tallennus on optimoitu välimuistilla.
+                        Ylläpidossa on kuitenkin mielenkiintoisia asioita ratkottavaksi, kuten miten tehdä ylläpitoskriptit kantojen muutostilanteisiin.
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </article>
 
     <footer class="footer mt-5 py-3 bg-light">
         <div class="container text-center">
