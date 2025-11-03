@@ -24,10 +24,10 @@
 
         <a href="https://github.com/Kettja12/aikajana-ssr/blob/e072c1b609c987aa242d944edb39cef923bf0fcd/Domain/?plain=1"
          class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Domain-kansio</a>
-        sisältää jokaista näkymää vastaavan luokan (esim. `Users.model`). Model-luokka sisältää kaiken näytön tarvitseman toimintalogiikan ja metodit, 
-        jotka hakevat tiedot Repository-moduulista State-luokan kautta Services-metodeilla.
-        Model-luokka on tietoinen State-luokasta ja pääsee sen kautta tarpeen mukaan käsiksi muihin tilan model-luokkiin. Näin toteutetaan esimerkiksi tilanne, jossa `DeviceModel` tarvitsee leimauslajeja: se voi kutsua 
-        `state.StampcategoryModel`-luokan metodeja, kuten `state.StampcategoryModel.SelectStampcategory(2345);`.
+        sisältää jokaista näkymää vastaavan `Model`-luokan (esim. `UserModel`). Kukin `Model`-luokka sisältää näytön tarvitseman toimintalogiikan ja metodit, 
+        jotka hakevat tiedot `Repository`-moduulista `State`-luokan kautta `Services`-metodeilla.
+        `Model`-luokka on tietoinen `State`-luokasta ja pääsee sen kautta tarpeen mukaan käsiksi muihin tilan `Model`-luokkiin. Näin toteutetaan esimerkiksi tilanne, jossa `DeviceModel` tarvitsee leimauslajeja: se voi kutsua 
+        `state.StampcategoryModel`-luokan metodeja, kuten `state.StampcategoryModel.SelectStampcategory(2345)`.
     </p>
     <h3>Luokkakaavio</h3>
     <div class="mermaid">
@@ -40,24 +40,29 @@
             Stampers["<b>State.Stampers.cs</b><br/>+ StamperModel: StamperModel<br/>+ LoadStampersAsync()<br/>+ SaveStamperAsync()<br/>+ SelectStamper(id)"]
             StampCategories["<b>State.StampCategories.cs</b><br/>+ StampcategoryModel: StampcategoryModel<br/>+ LoadStampCategoriesAsync()<br/>+ SaveStampCategoryAsync()<br/>+ SelectStampCategory(id)"]
         end
-        ServicesBox["<b>Services</b><br/><a href="../Repository/repository.html#Services">(Repository)</a>"]
+        ServicesBox["<b>Services</b><br/><a href="../repository/repository.html#Services">(Repository)</a>"]
         StateBase <-->|Kutsuu metodeja / Palauttaa dataa| ServicesBox
     </div>
     <h3>Tila</h3>
     <p>
         <a href="https://github.com/Kettja12/aikajana-ssr/blob/e072c1b609c987aa242d944edb39cef923bf0fcd/Domain/State.cs?plain=1"
-         class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Tila (State)</a>
-        on luokka, joka hoitaa sovelluksen tilanhallinnan. Jokaisella käyttäjällä on oma instanssinsa tilasta selaimen istunnon ajan, 
-        samalla tavalla kuin Web Forms -sovelluksissa `Session`-olio. Tila on osa domain-kerrosta, ja luokka huolehtii domain-objekteista.
-        Koodista näkee, että kun State-luokka luodaan, se saa parametrinaan Services-luokan, jota sitten tila itse tai modelit käyttävät.
+         class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">State-luokka</a>
+        hoitaa sovelluksen tilanhallinnan. Jokaisella käyttäjällä on selaimen istunnon ajan oma instanssinsa tilasta, 
+        vastaavasti kuin Web Forms -sovelluksissa `Session`-olio. Tila on osa domain-kerrosta ja huolehtii domain-objekteista.
+        Kuten koodista näkee, `State`-luokan instanssi saa parametrinaan `Services`-luokan, jota tila käyttää tietojen tuontiin ja vientiin tietokannasta.
+        `State`-luokan ydintiedosto sisältää myös metodit, joilla serialisoidaan ja deserialisoidaan avainluokka, joka tallennetaan selaimen IndexedDB-tietokantaan. 
+        Olisi mielenkiintoista kuulla, miten kolmas osapuoli voisi saada tämän tiedon haltuunsa ilman pääsyä asiakaskoneelle ja asentaa sen omalle koneelleen. 
+        Vaikka näin pääsisi tapahtumaan, sovelluksessa on kaksi toimintoa, jotka estävät luvattoman käytön: PIN-koodi ja tunnistautuminen puhelinsovelluksella,
+        mikäli ne on otettu käyttöön. 
+
         <pre data-src="State.cs" class="language-csharp"></pre>
     </p>
     <h3>Esimerkki UserModel-tiedosto</h3>
     <p>
-        Kuvasta näkee, kuinka tiedosto on partial class State-luokasta. Kaikki tiedoston metodit ovat State-luokan metodeja. Näin State modostaa domainin 
-        ja se sisältää entieteettejä kuten userModel. Niitö sitten käytetään käyttöliittyässä. Kaikki metodit on kuitenkin State-luokan metodeja joilla haetaan  
-        ja tallennetaan tietoja services-luokan instanssin kautta. 
-        Metodit on ryhmitelty loogisiin ruhmiin omiin partial-tiedostoihin.   
+        Koodiesimerkistä näkee, että `UserModel.cs` on `partial`-luokka `State`-luokasta. Tämän ansiosta kaikki tiedoston metodit ovat `State`-luokan metodeja. 
+        Näin `State` muodostaa domain-tason, joka sisältää entiteettejä, kuten `UserModel`, joita käyttöliittymä hyödyntää. 
+        Kaikki metodit ovat `State`-luokan metodeja, joilla haetaan ja tallennetaan tietoja `Services`-luokan instanssin kautta. 
+        Metodit on ryhmitelty loogisiin kokonaisuuksiin omiin `partial`-tiedostoihinsa.   
         <pre data-src="UserModel.cs" class="language-csharp"></pre>
     </p>
     </article>
