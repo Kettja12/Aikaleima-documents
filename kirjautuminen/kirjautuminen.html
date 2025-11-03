@@ -1,0 +1,96 @@
+<head>
+    <meta charset="UTF-8">
+    <viewport content="width=device-width, initial-scale=1.0">
+    <title>Kirjautuminen</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+
+</head>
+<body>
+    <article>
+        <h2>Kirjautuminen</h2>
+        <p>
+            Tämä projekti on API-palvelu, jota sovellukset voivat käyttää kirjautumispyyntöjen ja kirjautumisten hyväksymiseen.
+            Ei mitään monimutkaista: yksinkertainen palvelu, joka toteuttaa tiedonvälityksen sovelluksen A ja tunnistusvälineen B välillä.
+            Käydään vaihe vaiheelta läpi, miten sovellus rakennetaan. Mielestäni tämä käytäntö, jossa ketju rakennetaan työpöydältä tuotantoon asti, on parasta
+            tehdä mahdollisimman varhaisessa vaiheessa.
+         </p>
+    </article>
+    <article>
+        <h3>API-sovelluksen perusosat</h3>
+        <h4>Tavoite</h4>
+        <p>
+            Tehdään ensin perus-API-palvelu ja sille oletus-GET-funktio juureen: <b>app.MapGet("/",() => "I`m alive")</b>.
+            Yritetään saada se toimimaan osoitteessa kirjautuminen.aikaleima.fi.
+        </p>
+        <h4>Toteutus</h4>
+        <p>
+            Tässä ei varsinaisesti ole mitään erikoista: uusi API-sovellus Visual Studiolla, testaus että se toimii ja sitten julkaisu (publish).
+            Tiedostot kopioidaan omaan leimaus-alikansioon <b>/usr/share/homesite/leimaus</b>. Asetetaan oikeudet kohdalleen: kahdelle tiedostolle, kirjautuminen ja kirjautuminen.dll, asetetaan 755-oikeudet.
+            Sitten törmätään ensimmäiseen ongelmaan.
+        </p>
+        <h4>Ongelmien ratkaisu</h4>
+        <p style="overflow: auto;">
+            <img src="kaynnistysparametrit.png" alt="Kaynnistysparametrit" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="komentorivikaynnistys.png" alt="komentorivikaynnistys" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Se, mikä onnistuu testipalvelun kanssa, ei onnistu kirjautumispalvelimen kanssa, eli käynnistäminen nimellä, koska portti 5000 on varattu testipalvelulle (kuva 1).
+            Se ratkeaa komentoriviparametreilla: <b>./kirjautuminen --urls="http://127.0.0.1:8000"</b> (kuva 2).
+            Luonnollisesti kannattaa tehdä käynnistysskripti, jotta jatkossa ei tarvitse muistella portteja: <a href="start.sh">start.sh</a>.
+        </p>        
+        <p style="overflow: auto;">
+            <img src="curl.png" alt="Curl" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="konfiguraatio.png" alt="konfiguraatio" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Nyt palvelu on saatu käyntiin palvelimella. Miten se sitten testataan? Tarvitaan toinen istunto palvelimelle.
+            Ajetaan komento <b>curl http://127.0.0.1:8000</b> (kuva 1). Seuraavaksi laitetaan palvelulle kuntoon Nginx-konfiguraatiotiedosto kansioon
+             /etc/nginx/conf.d/kirjautuminen.conf (kuva 2). Sitten käynnistetään Nginx uudelleen.
+        </p>        
+        <p style="overflow: auto;">
+            <img src="koodimuutos.png" alt="koodimuutos" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="lopputulos.png" alt="lopputulos" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Tehdään pieni koodimuutos, koska sivusto on proxyn takana (kuva 1).
+            Lopputulos on sitten odotetun mukainen. Vielä ei ole valmista. Meidän täytyy laittaa palvelu pyörimään taustalla.
+            Nythän me käynnistimme sen testausta varten komentoriviltä terminaalissa.
+        </p>        
+        <p style="overflow: auto;">
+            <img src="service.png" alt="koodimuutos" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="palvelunkaynnistys.png" alt="lopputulos" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Tarvitaan tiedosto kansioon /etc/systemd/system/kirjautuminen.service (kuva 1) ja sitten pari komentoa:
+             <b>sudo systemctl daemon-reload</b> ja käynnistys <b>sudo systemctl start kirjautuminen</b> (kuva 2).
+            Ohje asennukseen löytyy Microsoftin sivuilta <a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-9.0&tabs=linux-ubuntu">tästä linkistä</a>.
+        </p>        
+    <script>
+         window.onload = function() {
+            // Haetaan kaikki kuvat, jotka ovat <article>-elementtien sisällä
+            const images = document.querySelectorAll('article img');
+
+            // Lisätään jokaiseen kuvaan tapahtumankäsittelijät
+            images.forEach(img => {
+                const originalWidth = img.width; // Tallennetaan alkuperäinen leveys
+
+                img.addEventListener('mouseover', () => {
+                    if (originalWidth==300){
+                        img.style.width = '600px'; // Muutetaan leveys 600px, kun hiiri on päällä
+                    }
+                    else{
+                        img.style.width = '600px'; // Muutetaan leveys 600px, kun hiiri on päällä
+                    }
+                });
+                img.addEventListener('mouseout', () => {
+                    img.style.width = originalWidth + 'px'; // Palautetaan alkuperäinen leveys, kun hiiri poistuu
+                });
+            });
+        }
+    
+</script>
+
+</body>

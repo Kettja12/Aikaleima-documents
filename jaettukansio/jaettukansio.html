@@ -1,0 +1,102 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <viewport content="width=device-width, initial-scale=1.0">
+    <title>Aikaleimapalvelu</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/prism.css">
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/prism.js" data-manual></script>
+    <script src="/js/prism-file-highlight.js"></script>
+    <script src="/js/prism-file-highlight.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+
+</head>
+<body>
+    <article>
+        <h2>Jaettu kansio</h2>
+        <p>
+            Tämä ongelma ei oikeastaan ole ohjelmointiongelma, vaan puhdasta käyttöympäristön virittelyä.
+            Pitää vain tietää pari perusasiaa Linuxista. Tehtävän tavoitteena on:
+            <ol  class="list-group list-group-numbered">
+                <li class="list-group-item">Luoda palvelimelle yhteinen kansio ja määrittää sen oikeudet.</li>
+                 <li class="list-group-item">Asettaa sovelluksen datapolku oikein.</li>
+                 <li class="list-group-item">Selvittää virhetilanteet.</li>
+            </ul>
+        </p>
+    </article>
+    <article>
+        <h3>Yhteinen kansio</h3>
+        <p style="overflow: auto;">
+            <img src="luontijaoikeudet.png" alt="Leimausasetukset" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="tiedostooikeudet.png" alt="Tiedostooikeudet" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            WinSCP on vaivattomin tapa tehdä muutokset, mutta toki homma onnistuu myös komentoriviltä. Luodaan datakansio muiden järjestelmään liittyvien kansioiden rinnalle, niin se löytyy helposti, kun seuraavan kerran etsii tietoja.
+            Siirretään datatiedostot asennuskansiosta sinne ja laitetaan tiedoston nimeksi alisivuston nimi, niin nimeäminen on johdonmukaista.
+        </p>    
+    </article>
+    <article>
+        <h3>Sovelluksen datapolku</h3>
+        <p style="overflow: auto;">
+            <img src="tietokantapolku.png" alt="Leimausasetukset" width="200" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Sovelluksen tietokantapolku on määritetty sovelluskansiossa olevassa appsettings.json-tiedostossa. Tiedostojen etämuokkaus on melko vaivatonta WinSCP:llä,
+            jos Vimin tai Nanon komentorivikomennot ovat kadonneet selkäytimestä. 
+        </p>    
+    </article>
+    <article>
+        <h3>Sovelluksen käynnistäminen</h3>
+        <p style="overflow: auto;">
+            <img src="palvelunkaynnistys.png" alt="Palvelunkaynnistys" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="kaynnistys.png" alt="Kaynnistys" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Putty on yleisin väline, jolla etäkäytetään komentoriviltä Linux-palvelimia Windowsista. Peruskomennot, ja kaikki näyttää olevan ok (kuva 1).
+            Sivulle menon jälkeen se ei kuitenkaan näytä toimivan, joten aloitetaan virheenjäljitys. Sammutetaan palvelu ja käynnistetään se sovelluskansiosta komentoriviltä.
+            Tämä on vain yksi tapa jäljittää ongelmia, mutta minusta yksinkertaisin (kuva 2).
+        </p>    
+    </article>
+    <article>
+        <h3>Virheenjäljitys</h3>
+        <p style="overflow: auto;">
+            <img src="kovakoodaus.png" alt="Kovakoodaus" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            <img src="koodimuutos.png" alt="Kovakoodaus" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Pikavilkaisulla vaikuttaisi jonkinlaiselta kovakoodaukselta (kuva 1).
+            Todennäköisesti ei ole siitä kysymys, mutta käydään koodipuolella lisäämässä vähän lokia.
+            Erilaisia lokitusjärjestelmiä on useita, mutta konsoli riittää aika pitkälle (kuva 2).
+        </p>    
+    </article>
+    <article>
+        <h3>Virheenjäljitys 2</h3>
+        <p style="overflow: auto;">
+            <img src="polkukunnossa.png" alt="Polkukunnossa" width="300" style="float: left; margin-right: 15px; margin-bottom: 5px;" />
+            Polku on kunnossa. Missä lienee ollut virhe, eivätkö tallennukset menneet perille vai mitä, mutta nyt toimii.
+        </p>    
+    </article>
+    <script>
+         window.onload = function() {
+            // Haetaan kaikki kuvat, jotka ovat <article>-elementtien sisällä
+            const images = document.querySelectorAll('article img');
+
+            // Lisätään jokaiseen kuvaan tapahtumankäsittelijät
+            images.forEach(img => {
+                const originalWidth = img.width; // Tallennetaan alkuperäinen leveys
+
+                img.addEventListener('mouseover', () => {
+                    if (originalWidth==300){
+                        img.style.width = '600px'; // Muutetaan leveys 600px, kun hiiri on päällä
+                    }
+                    else{
+                        img.style.width = '400px'; // Muutetaan leveys 600px, kun hiiri on päällä
+                    }
+                });
+                img.addEventListener('mouseout', () => {
+                    img.style.width = originalWidth + 'px'; // Palautetaan alkuperäinen leveys, kun hiiri poistuu
+                });
+            });
+        }
+    
+</script>
+</body>
+</html>

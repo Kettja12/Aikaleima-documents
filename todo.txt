@@ -1,8 +1,14 @@
 -Ylläpitosovelluksen versio 2
 --Ylläpitosovellus käyttämään WebClient-rajapintaa ja rajapinnan laajennus koskemaan kaikkia tietokantakutsuja.
--Tietokannat sovelluksen ulkopuoliseen kansioon
---Siirto mahdollistaa keskitetyn tietokantojen hallinnan ja mahdollisesti Docker-kontit, joissa data tallennetaan kontin ulkopuolelle.
 -Kaksivaiheisen kirjautumisen erottaminen ylläpitosovelluksesta erilliseksi API-palveluksi
+--<a href="kirjautuminen/kirjautuminen.html" class="btn btn-outline-secondary btn-sm"  rel="noopener noreferrer">kirjautuminen toteutus</a>
 --Ideana on, että sovellukset käyttäisivät erillistä API-rajapintaa, joka sisältää kirjautumispyyntöjä. Puhelinsovelluksessa olisi oma kuittaus kirjautumiselle ja lisäksi yhden näytön applikaatio, jolla voi tehdä kirjautumisen. Palvelu ei sinällään tiedä mitään asiakasjärjestelmistä, se vain välittää kirjautumispyyntöjä asiakasjärjestelmän sisäisillä avaimilla.
+
 -Postgress-tietokanta ylläpitoon
 --Olisi mielenkiintoista testata suorituskykyä. Se ei ole nopeampi kuin prosessin sisäinen kanta ja jo nyt leimaustapahtumien API-tallennus on optimoitu välimuistilla. Ylläpidossa on kuitenkin mielenkiintoisia asioita ratkottavaksi, kuten miten tehdä ylläpitoskriptit kantojen muutostilanteisiin.
+-Kilpailutilan lisääminen sovellukseen
+-- Kilpailutila Lähtö/maali ja reititpisteineen vaati hieman tietokanta virittelyä. Luonnollisesti oman ajoympäristön koska silloin 
+laitteiden ja leimauslajien luonne muuttuu.  
+-Kilpailujen reaaliaaikainen seuranta
+-- Reaaliaikainen  seurantakin vaati hieman copypaste koodia eräästä vanhasta järjestelmästä.
+Mutta sen suhteen voisi kokeilla myös <a href="https://htmx.org/"> HTMX-koodausta </a> jos sillä saisi luettua apista datan.  

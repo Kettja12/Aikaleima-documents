@@ -1,3 +1,6 @@
+-Tietokannat sovelluksen ulkopuoliseen kansioon (3.11.2023)
+--Siirto mahdollistaa keskitetyn tietokantojen hallinnan ja mahdollisesti Docker-kontit, joissa data tallennetaan kontin ulkopuolelle.
+--<a href="jaettukansio/jaettukansio.html" class="btn btn-outline-secondary btn-sm"  rel="noopener noreferrer">jaettu-kansio toteutus</a>
 -Wasm Blazor Client -leimaussovellus (2.11.2023)
 --Pieni kokeilu siitä, miten Blazor WebAssembly toimii leimaussovelluksena. Pienenä vastoinkäymisenä jouduin päivittämään .NET 10:n .NET 8:aan, koska 10-versio ei osannut luoda portable-versiota. Mutta mihin muuhunkaan sunnuntaipäivän voisi paremmin käyttää kuin ongelmien ratkomiseen.
 -Sormenjälkitunnistus leimaussovellukseen (1.11.2023)
