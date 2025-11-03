@@ -1,36 +1,106 @@
 ﻿using Shared;
 public partial class State
 {
-    public UserResponse RequestedUser { get; set; } = new();
 
-    public UserResponse User { get; set; } = new();
+    public UserResponse LoginUser { get; set; } = new();
 
-    UserModel? userModel;
-    public UserModel UserModel
+    public bool ViewUserLogin { get; set; }
+    public async Task<bool> UserLoginAsync(string token)
     {
-        get
+        if (token == string.Empty)
         {
-            if (userModel == null) userModel = new(this);
-            return userModel;
+            Refresh++;
+            ViewUserLogin = true;
+            return false;
         }
+        Request loginRequest = new(token);
+        LoginUser = await Services.LoginAsync(loginRequest);
+        LocalStorage.UserToken = LoginUser.Token;
+        MessageContent = LoginUser.Message;
+        MessageType = LoginUser.MessageType;
+        Refresh++;
+
+        if (MessageType != MessageTypes.AlertSuccess)
+        {
+            ViewUserLogin = true;
+            return false;
+        }
+        await InitializeState();
+        if (LoginUser.MFA)
+        {
+            ViewMFA = true;
+            Refresh++;
+        }
+        Loaded = true;
+        ViewUserLogin = false;
+        Refresh++;
+        return true;
     }
 
-}
+    public bool ViewMFA { get; set; }
+    public async Task<(bool, string)> UserCheckMFAStateAsync()
+    {
 
-public class UserModel
-{
+
+        var mfaStatus = await Services.UserCheckMFAStateAsync(new Request(LoginUser.Token));
+        MessageContent = mfaStatus.Message;
+        MessageType = mfaStatus.MessageType;
+        Refresh++;
+        if (MessageType != Shared.MessageTypes.AlertSuccess)
+        {
+            if (MessageContent == "Hyväksytty")
+
+            {
+                ViewMFA = false;
+                if (LoginUser.Pincode)
+                {
+                    ViewPinCode = true;
+                    return (true, MessageContent);
+                }
+                Loaded = true;
+                return (true, MessageContent);
+            }
+
+        }
+        return (false, MessageContent);
+    }
+    public bool ViewPinCode { get; set; }
+    public async Task<bool> PincodeLoginAsync(string pincode)
+    {
+        KeyRequest keyRequest = new(LoginUser.Token, pincode);
+        var response = await Services.PinCodeCheckAsync(keyRequest);
+        MessageType = response.MessageType;
+        MessageContent = response.Message;
+        Refresh++;
+        if (MessageType == Shared.MessageTypes.AlertWarning)
+        {
+            ViewPinCode = true;
+            return false;
+        }
+        Loaded = true;
+        return true;
+    }
+
     public UserResponse User = new();
 
-    State state;
-    public UserModel(State state)
-    {
-        this.state = state;
-    }
+
+    public string Authentication = "Ei päätelaite kirjautumista";
+
 
     public async Task SelectUserAsync(int id)
     {
-        IdRequest request = new(state.LoginToken, id);
-        User = await state.Services.UserAsync(request);
+        IdRequest request = new(LoginUser.Token, id);
+        User = await Services.UserAsync(request);
+
+        var device = await Services.UserDeviceAsync(request);
+        if (device.Id != 0)
+        {
+            Authentication = $"Kirjautumispäätelaite: {device.Name}";
+        }
+        else
+        {
+            Authentication = "Ei päätelaite kirjautumista. Liitä laite käyttäjälle laiteosiossa";
+        }
     }
 
     public string SendRegistrationKeyDisabled
@@ -41,9 +111,11 @@ public class UserModel
     public async Task SendRegistrationKey()
     {
         await SaveUser();
-        SendUserRegistrationRequest request = new(state.LoginToken, User);
-        var response = await state.Services.SendUserRegistrationAsync(request);
-        User = response.User;
+        SendUserRegistrationRequest request = new(LoginUser.Token, User);
+        User = await Services.SendUserRegistrationAsync(request);
+        MessageType = User.MessageType;
+        MessageContent = User.Message;
+        Refresh++;
     }
     public void AddUser()
     {
@@ -51,21 +123,11 @@ public class UserModel
     }
     public async Task SaveUser()
     {
-        UserSaveRequest request = new(state.LoginToken, User);
-        User = await state.Services.SaveUserAsync(request);
-        if (User.Status == "")
-        {
-            state.MessageType = MessageModel.AlertInfo;
-            state.MessageContent = Shared.ResponseMessages.SaveSuccess;
-            state.Refresh++;
-        }
-
-        if (User.Status != "")
-        {
-            state.MessageType = MessageModel.AlertWarning;
-            state.MessageContent = User.Status;
-            state.Refresh++;
-        }
+        UserSaveRequest request = new(LoginUser.Token, User);
+        User = await Services.SaveUserAsync(request);
+        MessageType = User.MessageType;
+        MessageContent = User.Message;
+        Refresh++;
     }
 
 }

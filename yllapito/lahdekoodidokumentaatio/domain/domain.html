@@ -31,45 +31,17 @@
     </p>
     <h3>Luokkakaavio</h3>
     <div class="mermaid">
-        classDiagram
-            direction LR
-        
-            class State {
-                +Services _services
-                +UserModel UserModel
-                +DeviceModel DeviceModel
-                +StampModel StampModel
-                +StamperModel StamperModel
-                +StampcategoryModel StampcategoryModel
-                +State(services)
-            }
-        
-            class BaseModel {
-                %% abstract
-                #State _state
-                +BaseModel(state)
-            }
-        
-            State "1" *-- "1" UserModel
-            State "1" *-- "1" DeviceModel
-            State "1" *-- "1" StampModel
-            State "1" *-- "1" StamperModel
-            State "1" *-- "1" StampcategoryModel
-        
-            UserModel --|> BaseModel
-            DeviceModel --|> BaseModel
-            StampModel --|> BaseModel
-            StamperModel --|> BaseModel
-            StampcategoryModel --|> BaseModel
-        
-            State --> Services : käyttää
-        
-            class Services {
-                %% Repository
-                +UserAsync(request)
-                +DeviceAsync(request)
-                +...
-            }
+      graph TD
+        subgraph "Domain: State (partial class)"
+            StateBase["<b>State.cs</b><br/>+ Loaded: bool<br/>+ LoginToken: string<br/>+ MessageType: string<br/>+ MessageContent: string"]
+            Users["<b>State.Users.cs</b><br/>+ UserModel: UserModel<br/>+ LoadUsersAsync()<br/>+ SaveUserAsync()<br/>+ SelectUser(id)"]
+            Devices["<b>State.Devices.cs</b><br/>+ DeviceModel: DeviceModel<br/>+ LoadDevicesAsync()<br/>+ SaveDeviceAsync()<br/>+ SelectDevice(id)"]
+            Stamps["<b>State.Stamps.cs</b><br/>+ StampModel: StampModel<br/>+ LoadStampsAsync()<br/>+ MarkTransferedAsync()<br/>+ DeleteTransferedAsync()"]
+            Stampers["<b>State.Stampers.cs</b><br/>+ StamperModel: StamperModel<br/>+ LoadStampersAsync()<br/>+ SaveStamperAsync()<br/>+ SelectStamper(id)"]
+            StampCategories["<b>State.StampCategories.cs</b><br/>+ StampcategoryModel: StampcategoryModel<br/>+ LoadStampCategoriesAsync()<br/>+ SaveStampCategoryAsync()<br/>+ SelectStampCategory(id)"]
+        end
+        ServicesBox["<b>Services</b><br/><a href="../Repository/repository.html#Services">(Repository)</a>"]
+        StateBase <-->|Kutsuu metodeja / Palauttaa dataa| ServicesBox
     </div>
     <h3>Tila</h3>
     <p>
@@ -80,10 +52,12 @@
         Koodista näkee, että kun State-luokka luodaan, se saa parametrinaan Services-luokan, jota sitten tila itse tai modelit käyttävät.
         <pre data-src="State.cs" class="language-csharp"></pre>
     </p>
-    <h3>Esimerkki UserModel-luokka</h3>
+    <h3>Esimerkki UserModel-tiedosto</h3>
     <p>
-        Kuvasta näkee, kuinka luokan instanssi on `partial State` -luokassa. Kun luokasta luodaan instanssi, se saa parametrina State-luokan instanssin. 
-        Huomaa, kuinka luokka käyttää State-luokan Services-metodeja tietojen hakuun ja tallennukseen. 
+        Kuvasta näkee, kuinka tiedosto on partial class State-luokasta. Kaikki tiedoston metodit ovat State-luokan metodeja. Näin State modostaa domainin 
+        ja se sisältää entieteettejä kuten userModel. Niitö sitten käytetään käyttöliittyässä. Kaikki metodit on kuitenkin State-luokan metodeja joilla haetaan  
+        ja tallennetaan tietoja services-luokan instanssin kautta. 
+        Metodit on ryhmitelty loogisiin ruhmiin omiin partial-tiedostoihin.   
         <pre data-src="UserModel.cs" class="language-csharp"></pre>
     </p>
     </article>
